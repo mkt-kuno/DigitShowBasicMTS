@@ -60,6 +60,9 @@
     <ClCompile Include="MainFrm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ModbusRTU.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="SamplingSettings.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -124,6 +127,9 @@
     <ClInclude Include="MainFrm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ModbusRTU.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="Resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -138,18 +144,15 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\DigitShowBasic.ico">
+    <Image Include="res\DigitShowBasicMTS.ico">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="res\DigitShowBasicDoc.ico">
+    <Image Include="res\DigitShowBasicMTSDoc.ico">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="Caio.lib" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="res\DigitShowBasic.rc2">
