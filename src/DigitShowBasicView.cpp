@@ -64,13 +64,8 @@ BEGIN_MESSAGE_MAP(CDigitShowBasicView, CFormView)
 	ON_BN_CLICKED(IDC_BUTTON_StartSave, OnBUTTONStartSave)
 	ON_BN_CLICKED(IDC_BUTTON_StopSave, OnBUTTONStopSave)
 	ON_WM_DESTROY()
-	ON_BN_CLICKED(IDC_BUTTON_InterceptSave, OnBUTTONInterceptSave)
 	ON_BN_CLICKED(IDC_BUTTON_SetCtrlID, OnBUTTONSetCtrlID)
 	ON_BN_CLICKED(IDC_BUTTON_SetSamplingTime, OnBUTTONSetSamplingTime)
-	ON_BN_CLICKED(IDC_BUTTON_FIFOStart, OnBUTTONFIFOStart)
-	ON_BN_CLICKED(IDC_BUTTON_FIFOStop, OnBUTTONFIFOStop)
-	ON_BN_CLICKED(IDC_BUTTON_WriteData, OnBUTTONWriteData)
-	ON_BN_CLICKED(IDC_BUTTON_DChannel, OnBUTTONDChannel)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -313,14 +308,8 @@ void CDigitShowBasicView::OnInitialUpdate()
 	ResizeParentToFit();
 	CButton* myBTN1=(CButton*)GetDlgItem(IDC_BUTTON_CtrlOff);
 	CButton* myBTN2=(CButton*)GetDlgItem(IDC_BUTTON_StopSave);
-	CButton* myBTN3=(CButton*)GetDlgItem(IDC_BUTTON_InterceptSave);
-	CButton* myBTN4=(CButton*)GetDlgItem(IDC_BUTTON_FIFOStop);
-	CButton* myBTN5=(CButton*)GetDlgItem(IDC_BUTTON_WriteData);
 	myBTN1->EnableWindow(FALSE);
 	myBTN2->EnableWindow(FALSE);
-	myBTN3->EnableWindow(FALSE);
-	myBTN4->EnableWindow(FALSE);
-	myBTN5->EnableWindow(FALSE);
 	CString tmp;
 	CComboBox* m_Combo1 = (CComboBox*)GetDlgItem(IDC_COMBO_Control_ID);
 	m_Combo1->InsertString(-1,"0");	m_Combo1->InsertString(-1,"1");
@@ -576,14 +565,8 @@ void CDigitShowBasicView::OnBUTTONStartSave()
 			ctx->flags.SaveData=TRUE;
 			CButton* myBTN1=(CButton*)GetDlgItem(IDC_BUTTON_StartSave);
 			CButton* myBTN2=(CButton*)GetDlgItem(IDC_BUTTON_StopSave);
-			CButton* myBTN3=(CButton*)GetDlgItem(IDC_BUTTON_InterceptSave);
-			CButton* myBTN4=(CButton*)GetDlgItem(IDC_BUTTON_FIFOStart);
-			CButton* myBTN5=(CButton*)GetDlgItem(IDC_BUTTON_FIFOStop);
 			myBTN1->EnableWindow(FALSE);	
 			myBTN2->EnableWindow(TRUE);
-			myBTN3->EnableWindow(TRUE);
-			myBTN4->EnableWindow(FALSE);
-			myBTN5->EnableWindow(FALSE);
 //
 			if(ctx->flags.SetBoard)	pDoc -> AD_INPUT();
 			pDoc -> Cal_Physical();
@@ -616,40 +599,13 @@ void CDigitShowBasicView::OnBUTTONStopSave()
 		fclose(ctx->FileSaveData2);
 		CButton* myBTN1=(CButton*)GetDlgItem(IDC_BUTTON_StartSave);
 		CButton* myBTN2=(CButton*)GetDlgItem(IDC_BUTTON_StopSave);	
-		CButton* myBTN3=(CButton*)GetDlgItem(IDC_BUTTON_InterceptSave);
-		CButton* myBTN4=(CButton*)GetDlgItem(IDC_BUTTON_FIFOStart);
-		CButton* myBTN5=(CButton*)GetDlgItem(IDC_BUTTON_FIFOStop);
 		myBTN1->EnableWindow(TRUE);	
 		myBTN2->EnableWindow(FALSE);
-		myBTN3->EnableWindow(FALSE);	
-		myBTN4->EnableWindow(TRUE);
-		myBTN5->EnableWindow(FALSE);
 		ctx->flags.SaveData=FALSE;
 	}
 
 }
 
-void CDigitShowBasicView::OnBUTTONInterceptSave() 
-{	DigitShowContext* ctx = GetContext();
-	// TODO: Add your control notification handler code here
-	CDigitShowBasicDoc* pDoc=(CDigitShowBasicDoc *)GetDocument();
-	_ftime(&NowTime2);
-	ctx->SequentTime2=double(NowTime2.time-StartTime2.time)+double( (NowTime2.millitm-StartTime2.millitm)/1000.0 );	
-	if(ctx->flags.SetBoard)	pDoc -> AD_INPUT();
-	pDoc -> Cal_Physical();
-	pDoc -> Cal_Param();
-	pDoc -> SaveToFile();	
-}
-void CDigitShowBasicView::OnBUTTONFIFOStart() 
-{	AfxMessageBox("FIFO buffering is not available with Modbus RTU polling.", MB_OK | MB_ICONINFORMATION, 0);
-}
-
-void CDigitShowBasicView::OnBUTTONFIFOStop() 
-{	AfxMessageBox("FIFO buffering is not available with Modbus RTU polling.", MB_OK | MB_ICONINFORMATION, 0);
-}
-void CDigitShowBasicView::OnBUTTONWriteData() 
-{	AfxMessageBox("Buffered memory export is not available with Modbus RTU polling.", MB_OK | MB_ICONINFORMATION, 0);
-}
 void CDigitShowBasicView::OnBUTTONSetCtrlID() 
 {	DigitShowContext* ctx = GetContext();
 	// TODO: この位置にコントロール通知ハンドラ用のコードを追加してください
@@ -684,11 +640,6 @@ void CDigitShowBasicView::OnBUTTONSetSamplingTime()
 		KillTimer(3);
 		SetTimer(3,ctx->timeSettings.Interval3,NULL);
 	}	
-}
-
-void CDigitShowBasicView::OnBUTTONDChannel() 
-{	m_DChannel = "Ch.00-15";
-	Reflesh();
 }
 
 void CDigitShowBasicView::Reflesh()

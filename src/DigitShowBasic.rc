@@ -270,7 +270,6 @@ BEGIN
     LTEXT           "ID_13: No Control,",IDC_STATIC,284,358,52,8
     LTEXT           "ID_14: No Control,",IDC_STATIC,284,374,52,8
     LTEXT           "ID_15: Control from file.",IDC_STATIC,284,390,69,8
-    PUSHBUTTON      "Intercepted Saving",IDC_BUTTON_InterceptSave,472,314,104,15
     GROUPBOX        "Settings of Control ID = 15.",IDC_STATIC,472,347,104,79
     LTEXT           "Step No.",IDC_STATIC,476,362,26,8
     LTEXT           "Control Pattern No.",IDC_STATIC,476,377,57,8
@@ -288,9 +287,6 @@ BEGIN
     PUSHBUTTON      "Set",IDC_BUTTON_SetCtrlID,106,281,24,14
     PUSHBUTTON      "Set",IDC_BUTTON_SetSamplingTime,106,297,24,14
     GROUPBOX        "Setting Control_ID and Sampling Time",IDC_STATIC,6,271,127,60
-    PUSHBUTTON      "Modbus",IDC_BUTTON_FIFOStart,472,331,35,14
-    PUSHBUTTON      "Polling",IDC_BUTTON_FIFOStop,507,331,35,14
-    PUSHBUTTON      "Write data",IDC_BUTTON_WriteData,541,331,35,14
     CTEXT           "Static",IDC_STATIC_VLT00,16,21,55,8
     CTEXT           "Static",IDC_STATIC_VLT01,80,21,58,8
     CTEXT           "Static",IDC_STATIC_VLT02,152,21,57,8
@@ -325,7 +321,6 @@ BEGIN
     CTEXT           "Static",IDC_STATIC_PHY15,504,127,54,8
     LTEXT           "Displayed channel",IDC_STATIC,12,315,54,8
     EDITTEXT        IDC_EDIT_DChannel,72,313,33,14,ES_CENTER | ES_AUTOHSCROLL | ES_READONLY
-    PUSHBUTTON      "Change",IDC_BUTTON_DChannel,106,313,24,14
 END
 
 IDD_SamplingSettings DIALOG 0, 0, 219, 257
@@ -1220,4 +1215,3 @@ LANGUAGE 17, 1
 
 /////////////////////////////////////////////////////////////////////////////
 #endif    // not APSTUDIO_INVOKED
-
