@@ -22,6 +22,7 @@
 #include "DigitShowBasic.h"
 #include "BoardSettings.h"
 #include "DigitShowContext.h"
+#include "ModbusRTU.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -29,15 +30,9 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
-/////////////////////////////////////////////////////////////////////////////
-// CBoardSettings ダイアログ
-//---boards---
-
-
 CBoardSettings::CBoardSettings(CWnd* pParent /*=NULL*/)
 	: CDialog(CBoardSettings::IDD, pParent)
 {
-	//{{AFX_DATA_INIT(CBoardSettings)
 	m_AdMaxChannel1 = _T("");
 	m_AdMaxChannel2 = _T("");
 	m_AdMethod1 = _T("");
@@ -49,14 +44,11 @@ CBoardSettings::CBoardSettings(CWnd* pParent /*=NULL*/)
 	m_DaMaxChannel = _T("");
 	m_DaRange = _T("");
 	m_DaResolution = _T("");
-	//}}AFX_DATA_INIT
 }
 
-
 void CBoardSettings::DoDataExchange(CDataExchange* pDX)
-{	DigitShowContext* ctx = GetContext();
+{   DigitShowContext* ctx = GetContext();
 	CDialog::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CBoardSettings)
 	DDX_Text(pDX, IDC_EDIT_AdMaxChannel1, m_AdMaxChannel1);
 	DDX_Text(pDX, IDC_EDIT_AdMaxChannel2, m_AdMaxChannel2);
 	DDX_Text(pDX, IDC_EDIT_AdMethod1, m_AdMethod1);
@@ -68,50 +60,26 @@ void CBoardSettings::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_EDIT_DaMaxChannel, m_DaMaxChannel);
 	DDX_Text(pDX, IDC_EDIT_DaRange, m_DaRange);
 	DDX_Text(pDX, IDC_EDIT_DaResolution, m_DaResolution);
-	//}}AFX_DATA_MAP
 }
 
-
 BEGIN_MESSAGE_MAP(CBoardSettings, CDialog)
-	//{{AFX_MSG_MAP(CBoardSettings)
-	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-/////////////////////////////////////////////////////////////////////////////
-// CBoardSettings メッセージ ハンドラ
-
 BOOL CBoardSettings::OnInitDialog() 
-{	DigitShowContext* ctx = GetContext();
+{   DigitShowContext* ctx = GetContext();
 	CDialog::OnInitDialog();
-	
-	// TODO: この位置に初期化の補足処理を追加してください
-	if(ctx->NumAD >0 && ctx->ad[0].InputMethod==0) m_AdMethod1="Single Input";
-	if(ctx->NumAD >0 && ctx->ad[0].InputMethod==1) m_AdMethod1="Differential Input";
-	if(ctx->NumAD >0 && ctx->ad[0].Resolution==12) m_AdResolution1="12 bit";
-	if(ctx->NumAD >0 && ctx->ad[0].Resolution==16) m_AdResolution1="16 bit";
-	if(ctx->NumAD >0 && ctx->ad[0].Range==0)  m_AdRange1="-10V   +10V";
-	if(ctx->NumAD >0 && ctx->ad[0].Range==1)  m_AdRange1="-5V   +5V";
-	if(ctx->NumAD >0 && ctx->ad[0].Range==50) m_AdRange1="0V   +10V";
-	if(ctx->NumAD >0 && ctx->ad[0].Range==51) m_AdRange1="0V   +5V";
-	if(ctx->NumAD >0) m_AdMaxChannel1.Format("%3d",ctx->ad[0].Channels);
-	if(ctx->NumAD >1 && ctx->ad[1].InputMethod==0) m_AdMethod2="Single Input";
-	if(ctx->NumAD >1 && ctx->ad[1].InputMethod==1) m_AdMethod2="Differential Input";
-	if(ctx->NumAD >1 && ctx->ad[1].Resolution==12) m_AdResolution2="12 bit";
-	if(ctx->NumAD >1 && ctx->ad[1].Resolution==16) m_AdResolution2="16 bit";
-	if(ctx->NumAD >1 && ctx->ad[1].Range==0)  m_AdRange2="-10V   +10V";
-	if(ctx->NumAD >1 && ctx->ad[1].Range==1)  m_AdRange2="-5V   +5V";
-	if(ctx->NumAD >1 && ctx->ad[1].Range==50) m_AdRange2="0V   +10V";
-	if(ctx->NumAD >1 && ctx->ad[1].Range==51) m_AdRange2="0V   +5V";
-	if(ctx->NumAD >1) m_AdMaxChannel2.Format("%3d",ctx->ad[1].Channels);
-	
-	if(ctx->NumDA >0 && ctx->da[0].Resolution==12) m_DaResolution="12 bit";
-	if(ctx->NumDA >0 && ctx->da[0].Resolution==16) m_DaResolution="16 bit";
-	if(ctx->NumDA >0 && ctx->da[0].Range==0)  m_DaRange="-10V   +10V";
-	if(ctx->NumDA >0 && ctx->da[0].Range==1)  m_DaRange="-5V   +5V";
-	if(ctx->NumDA >0 && ctx->da[0].Range==50) m_DaRange="0V   +10V";
-	if(ctx->NumDA >0 && ctx->da[0].Range==51) m_DaRange="0V   +5V";
-	if(ctx->NumDA >0) m_DaMaxChannel.Format("%3d",ctx->da[0].Channels);
-	UpdateData(FALSE);	
-	return TRUE;  // コントロールにフォーカスを設定しないとき、戻り値は TRUE となります
-	              // 例外: OCX プロパティ ページの戻り値は FALSE となります
+	ModbusRTU* modbus = GetModbusInstance();
+	m_AdMethod1 = _T("HX711");
+	m_AdResolution1 = _T("16-bit signed");
+	m_AdRange1 = (ctx->flags.SetBoard && modbus->IsOpen()) ? _T("Connected") : _T("Not connected");
+	m_AdMaxChannel1 = _T("8 (ch0-7)");
+	m_AdMethod2 = _T("ADS1115");
+	m_AdResolution2 = _T("16-bit signed");
+	m_AdRange2 = _T("Modbus RTU 38400bps");
+	m_AdMaxChannel2 = _T("8 (ch8-15)");
+	m_DaResolution = _T("GP8403");
+	m_DaRange = _T("0-10000 mV");
+	m_DaMaxChannel = _T("8 (ch0-7)");
+	UpdateData(FALSE);
+	return TRUE;
 }

@@ -64,9 +64,9 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDR_MAINFRAME           ICON                    "res\\DigitShowBasicTS.ico"
+IDR_MAINFRAME           ICON                    "res\\DigitShowBasicMTS.ico"
 
-IDR_DIGITSTYPE          ICON                    "res\\DigitShowBasicTSDoc.ico"
+IDR_DIGITSTYPE          ICON                    "res\\DigitShowBasicMTSDoc.ico"
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -143,7 +143,7 @@ END
 
 IDD_ABOUTBOX DIALOGEX 0, 0, 235, 55
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "DigitShowBasic for Torsional Test"
+CAPTION "DigitShowBasicMTS for Torsional Test"
 FONT 9, "ＭＳ Ｐゴシック", 0, 0, 0x0
 BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
@@ -288,8 +288,8 @@ BEGIN
     PUSHBUTTON      "Set",IDC_BUTTON_SetCtrlID,106,281,24,14
     PUSHBUTTON      "Set",IDC_BUTTON_SetSamplingTime,106,297,24,14
     GROUPBOX        "Setting Control_ID and Sampling Time",IDC_STATIC,6,271,127,60
-    PUSHBUTTON      "Start FIFO",IDC_BUTTON_FIFOStart,472,331,35,14
-    PUSHBUTTON      "Stop FIFO",IDC_BUTTON_FIFOStop,507,331,35,14
+    PUSHBUTTON      "Modbus",IDC_BUTTON_FIFOStart,472,331,35,14
+    PUSHBUTTON      "Polling",IDC_BUTTON_FIFOStop,507,331,35,14
     PUSHBUTTON      "Write data",IDC_BUTTON_WriteData,541,331,35,14
     CTEXT           "Static",IDC_STATIC_VLT00,16,21,55,8
     CTEXT           "Static",IDC_STATIC_VLT01,80,21,58,8
@@ -330,7 +330,7 @@ END
 
 IDD_SamplingSettings DIALOG 0, 0, 219, 257
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Sampling Conditions"
+CAPTION "Sampling / Polling Settings"
 FONT 9, "ＭＳ Ｐゴシック"
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,86,235,50,14
@@ -338,10 +338,10 @@ BEGIN
     LTEXT           "Time Interval (ms) to display",IDC_STATIC,12,21,86,8
     LTEXT           "Time Interval (ms) to feed back",IDC_STATIC,12,38,94,8
     LTEXT           "Time Interval (ms) to save data",IDC_STATIC,12,55,94,8
-    EDITTEXT        IDC_EDIT_TimeInterval1,109,18,40,14,ES_RIGHT | ES_AUTOHSCROLL | ES_READONLY
-    EDITTEXT        IDC_EDIT_TimeInterval2,109,35,40,14,ES_RIGHT | ES_AUTOHSCROLL | ES_READONLY
-    EDITTEXT        IDC_EDIT_TimeInterval3,109,52,40,14,ES_RIGHT | ES_AUTOHSCROLL | ES_READONLY
-    GROUPBOX        "Sampling Condition with FIFO Memory",IDC_STATIC,7,78,206,153
+    EDITTEXT        IDC_EDIT_TimeInterval1,109,18,40,14,ES_RIGHT | ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_TimeInterval2,109,35,40,14,ES_RIGHT | ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_TimeInterval3,109,52,40,14,ES_RIGHT | ES_AUTOHSCROLL
+    GROUPBOX        "Modbus RTU polling information",IDC_STATIC,7,78,206,153
     LTEXT           "Memory Type",IDC_STATIC,12,93,40,8
     LTEXT           "Channels",IDC_STATIC,12,109,28,8
     LTEXT           "EventSamplingTimes (n)",IDC_STATIC,12,126,72,8
@@ -358,7 +358,7 @@ BEGIN
     EDITTEXT        IDC_EDIT_SamplingClock,109,191,40,14,ES_RIGHT | ES_AUTOHSCROLL
     LTEXT           "Saving Time (s)",IDC_STATIC,12,211,47,8
     EDITTEXT        IDC_EDIT_SavingTime,109,208,40,14,ES_RIGHT | ES_AUTOHSCROLL
-    PUSHBUTTON      "Check",IDC_BUTTON_Check,158,93,50,14
+    PUSHBUTTON      "Refresh",IDC_BUTTON_Check,158,93,50,14
     PUSHBUTTON      "Cancel",IDCANCEL,151,235,50,14
 END
 
@@ -882,8 +882,8 @@ FONT 9, "ＭＳ Ｐゴシック"
 BEGIN
     DEFPUSHBUTTON   "Close",IDOK,144,153,50,14
     LTEXT           "Input Method",IDC_STATIC,13,35,39,8
-    GROUPBOX        "A/D Board",IDC_STATIC,7,7,187,93
-    GROUPBOX        "D/A Board",IDC_STATIC,7,106,113,61
+    GROUPBOX        "Modbus AI (HX711 / ADS1115)",IDC_STATIC,7,7,187,93
+    GROUPBOX        "Modbus AO (GP8403)",IDC_STATIC,7,106,113,61
     LTEXT           "Resolution",IDC_STATIC,13,51,32,8
     LTEXT           "Range",IDC_STATIC,13,67,19,8
     LTEXT           "Max.Channel",IDC_STATIC,13,84,38,8
@@ -897,12 +897,12 @@ BEGIN
     EDITTEXT        IDC_EDIT_DaResolution,56,116,57,14,ES_CENTER | ES_AUTOHSCROLL | ES_READONLY
     EDITTEXT        IDC_EDIT_DaRange,56,133,57,14,ES_CENTER | ES_AUTOHSCROLL | ES_READONLY
     EDITTEXT        IDC_EDIT_DaMaxChannel,56,149,57,14,ES_CENTER | ES_AUTOHSCROLL | ES_READONLY
-    LTEXT           "1st.",IDC_STATIC,82,20,11,8
+    LTEXT           "HX711(0-7)",IDC_STATIC,72,20,45,8
     EDITTEXT        IDC_EDIT_AdMethod2,130,32,57,14,ES_CENTER | ES_AUTOHSCROLL | ES_READONLY
     EDITTEXT        IDC_EDIT_AdResolution2,130,50,57,14,ES_CENTER | ES_AUTOHSCROLL | ES_READONLY
     EDITTEXT        IDC_EDIT_AdRange2,130,66,57,14,ES_CENTER | ES_AUTOHSCROLL | ES_READONLY
     EDITTEXT        IDC_EDIT_AdMaxChannel2,130,82,57,14,ES_CENTER | ES_AUTOHSCROLL | ES_READONLY
-    LTEXT           "2nd.",IDC_STATIC,153,20,12,8
+    LTEXT           "ADS1115(8-15)",IDC_STATIC,127,20,59,8
 END
 
 
@@ -928,12 +928,12 @@ BEGIN
     BEGIN
         BLOCK "041104b0"
         BEGIN
-            VALUE "FileDescription", "DigitShowBasicTS MFC ｱﾌﾟﾘｹｰｼｮﾝ"
+            VALUE "FileDescription", "DigitShowBasicMTS MFC ｱﾌﾟﾘｹｰｼｮﾝ"
             VALUE "FileVersion", "1, 0, 0, 1"
-            VALUE "InternalName", "DigitShowBasicTS"
+            VALUE "InternalName", "DigitShowBasicMTS"
             VALUE "LegalCopyright", "Copyright (C) 2001"
-            VALUE "OriginalFilename", "DigitShowBasicTS.EXE"
-            VALUE "ProductName", "DigitShowBasicTS ｱﾌﾟﾘｹｰｼｮﾝ"
+            VALUE "OriginalFilename", "DigitShowBasicMTS.EXE"
+            VALUE "ProductName", "DigitShowBasicMTS ｱﾌﾟﾘｹｰｼｮﾝ"
             VALUE "ProductVersion", "1, 0, 0, 1"
         END
     END
@@ -1096,7 +1096,7 @@ END
 
 STRINGTABLE
 BEGIN
-    IDR_MAINFRAME           "DigitShowBasicTS\n\nDigitS\n\n\nDigitShowBasic.Document\nDigitS Document"
+    IDR_MAINFRAME           "DigitShowBasicMTS\n\nDigitS\n\n\nDigitShowBasicMTS.Document\nDigitS Document"
 END
 
 STRINGTABLE
