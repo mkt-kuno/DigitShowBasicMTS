@@ -82,15 +82,16 @@ A control number of **0 must stop loading** — do not let new modes break that 
 
 | CH | Signal |
 |---|---|
-| CH00 | EP cell pressure |
-| CH01 | Axial motor On/Off (0 V = On, 5 V = Off) |
-| CH02 | Axial clutch |
-| CH03 | Axial motor speed |
-| CH04 | Torsion motor On/Off (0 V = On, 5 V = Off) |
-| CH05 | Torsion clutch |
-| CH06 | Torsion motor speed |
+| CH00 | Axial motor On/Off (0 V = Off, 5 V = On) |
+| CH01 | Axial direction (Clutch) (0 V = Down, 5 V = Up) |
+| CH02 | Axial motor speed |
+| CH03 | EP cell pressure |
+| CH04 | EP axial pressure (mirrors EP cell) |
+| CH05 | Torsion motor On/Off (0 V = Off, 5 V = On) |
+| CH06 | Torsion direction (Clutch) (0 V = CW, 5 V = CCW) |
+| CH07 | Torsion motor speed |
 
-Channel indices live in `CH_Axis*` / `CH_Torsion*` members of `CDigitShowBasicDoc` (`DigitShowBasicDoc.cpp`). DA calibration factors per channel are set as `DA_Cal_a[]` / `DA_Cal_b[]` (e.g., torsion speed in V/RPM).
+Channel indices are defined via `#define DA_CH_*` in `src/DigitShowContext.h` and accessed via `ctx->daCh.*`. DA calibration factors per channel are set as `ctx->ao.cal.a[]` / `ctx->ao.cal.b[]`.
 
 ### AI channel assignments (`NameV[]` / `NameP[]`, up to 32 ch)
 

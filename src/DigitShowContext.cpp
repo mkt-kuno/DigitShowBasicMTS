@@ -67,12 +67,10 @@ void InitContext(DigitShowContext* ctx)
 	ctx->NameV[7] = _T("CG3");	ctx->NameP[7] = _T("CG3,mm");
 	ctx->NameV[8] = _T("HCDPT");	ctx->NameP[8] = _T("EffectiveStress,kPa");
 	ctx->NameV[9] = _T("LCDPT");	ctx->NameP[9] = _T("DeltaVol.,mm3");
-	ctx->NameV[10] = _T("T.Disp");	ctx->NameP[10] = _T("T.Disp,rad");
+	ctx->NameV[10] = _T("T.Disp");	ctx->NameP[10] = _T("Tor disp,deg");
 	for (i = 11; i < AI_MAX_CHANNELS; i++) {
-		CString tmp;
-		tmp.Format(_T("CH%d"), i);
-		ctx->NameV[i] = tmp;
-		ctx->NameP[i] = tmp;
+		ctx->NameV[i] = _T("");
+		ctx->NameP[i] = _T("");
 	}
 
 	ctx->NameDV[0] = _T("CH00: Axial Motor ON/OFF");

@@ -236,8 +236,8 @@ void CDigitShowBasicDoc::Cal_Param()
 	ctx->phys.height=ctx->specimen.Height[0]-ctx->ai.phy[1];
 	ctx->phys.volume=ctx->specimen.Volume[0]-ctx->phys.BW2;
 	ctx->phys.area=ctx->phys.volume/ctx->phys.height;
-	ctx->phys.rotation1=ctx->ai.phy[10];
-	ctx->phys.rotation2=ctx->ai.phy[10]; // Legacy dual-POT logic now shares the single provisional T.Disp channel.
+	ctx->phys.rotation1 = ctx->ai.phy[10] * 3.14159265358979323846 / 180.0;
+	ctx->phys.rotation2 = ctx->phys.rotation1; // Consolidated from dual POT to single Tor disp (deg), converted to rad.
 	ctx->phys.diameter_in=ctx->specimen.DiameterIn[0]*sqrt((1-ctx->phys.BW2/ctx->specimen.Volume[0])/(1-ctx->ai.phy[1]/ctx->specimen.Height[0]));
 	ctx->phys.diameter_out=ctx->specimen.DiameterOut[0]*sqrt((1-ctx->phys.BW2/ctx->specimen.Volume[0])/(1-ctx->ai.phy[1]/ctx->specimen.Height[0]));
 	ctx->phys.diameterInM = ctx->phys.diameter_in - ctx->specimen.MembraneThickness / 2.0;

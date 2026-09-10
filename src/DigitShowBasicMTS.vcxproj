@@ -28,23 +28,23 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <UseOfMfc>Dynamic</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <UseOfMfc>Dynamic</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <UseOfMfc>Dynamic</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <UseOfMfc>Dynamic</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -169,7 +169,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BoardSettings.cpp" />
     <ClCompile Include="CalibrationAmp.cpp" />
     <ClCompile Include="CalibrationFactor.cpp" />
     <ClCompile Include="Control_Consolidation.cpp" />
@@ -185,7 +184,6 @@
     <ClCompile Include="DigitShowContext.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="ModbusRTU.cpp" />
-    <ClCompile Include="SamplingSettings.cpp" />
     <ClCompile Include="Specimen.cpp" />
     <ClCompile Include="StdAfx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -198,7 +196,6 @@
     <ResourceCompile Include="DigitShowBasic.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BoardSettings.h" />
     <ClInclude Include="CalibrationAmp.h" />
     <ClInclude Include="CalibrationFactor.h" />
     <ClInclude Include="Control_Consolidation.h" />
@@ -216,7 +213,6 @@
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="ModbusRTU.h" />
     <ClInclude Include="Resource.h" />
-    <ClInclude Include="SamplingSettings.h" />
     <ClInclude Include="Specimen.h" />
     <ClInclude Include="StdAfx.h" />
   </ItemGroup>

@@ -76,7 +76,6 @@ CCalibrationFactor::CCalibrationFactor(CWnd* pParent /*=NULL*/)
 	m_CH13 = _T("");
 	m_CH14 = _T("");
 	m_CH15 = _T("");
-	m_DChannel = _T("");
 	//}}AFX_DATA_INIT
 }
 
@@ -180,7 +179,6 @@ void CCalibrationFactor::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_STATIC_CH13, m_CH13);
 	DDX_Text(pDX, IDC_STATIC_CH14, m_CH14);
 	DDX_Text(pDX, IDC_STATIC_CH15, m_CH15);
-	DDX_Text(pDX, IDC_EDIT_DChannel, m_DChannel);
 	//}}AFX_DATA_MAP
 }
 
@@ -222,7 +220,6 @@ BEGIN_MESSAGE_MAP(CCalibrationFactor, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON_Amp15, OnBUTTONAmp15)
 	ON_BN_CLICKED(IDC_BUTTON_CFSave, OnBUTTONCFSave)
 	ON_BN_CLICKED(IDC_BUTTON_CFLoadFile, OnBUTTONCFLoadFile)
-	ON_BN_CLICKED(IDC_BUTTON_Channel, OnBUTTONChannel)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -234,39 +231,48 @@ BOOL CCalibrationFactor::OnInitDialog()
 	CDialog::OnInitDialog();
 	
 	// TODO: Add extra initialization here
-	m_DChannel = _T("Ch.00-15");
 	Load();
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }
 
-void CCalibrationFactor::OnBUTTONChannel() 
-{	DigitShowContext* ctx = GetContext();
-	m_DChannel = _T("Ch.00-15");
-	Load();
+static CString FormatChannelLabel(int ch, const CString& name)
+{
+	CString trimmed = name;
+	trimmed.Trim();
+	CString defaultName;
+	defaultName.Format(_T("CH%d"), ch);
+
+	if (trimmed.IsEmpty() || trimmed.CompareNoCase(_T("None")) == 0 || trimmed.CompareNoCase(defaultName) == 0) {
+		CString str;
+		str.Format(_T("%02d:"), ch);
+		return str;
+	}
+	CString str;
+	str.Format(_T("%02d: %s"), ch, (LPCTSTR)trimmed);
+	return str;
 }
 
 void CCalibrationFactor::Load()
 {	DigitShowContext* ctx = GetContext();
 	pDoc -> AD_INPUT();
 	pDoc -> Cal_Physical();
-	m_DChannel = _T("Ch.00-15");
-	m_CH00 = "CH00: "+ctx->NameP[0];	m_Amp00.SetWindowText("Amp.00");
-	m_CH01 = "CH01: "+ctx->NameP[1];	m_Amp01.SetWindowText("Amp.01");
-	m_CH02 = "CH02: "+ctx->NameP[2];	m_Amp02.SetWindowText("Amp.02");
-	m_CH03 = "CH03: "+ctx->NameP[3];	m_Amp03.SetWindowText("Amp.03");
-	m_CH04 = "CH04: "+ctx->NameP[4];	m_Amp04.SetWindowText("Amp.04");
-	m_CH05 = "CH05: "+ctx->NameP[5];	m_Amp05.SetWindowText("Amp.05");
-	m_CH06 = "CH06: "+ctx->NameP[6];	m_Amp06.SetWindowText("Amp.06");
-	m_CH07 = "CH07: "+ctx->NameP[7];	m_Amp07.SetWindowText("Amp.07");
-	m_CH08 = "CH08: "+ctx->NameP[8];	m_Amp08.SetWindowText("Amp.08");
-	m_CH09 = "CH09: "+ctx->NameP[9];	m_Amp09.SetWindowText("Amp.09");
-	m_CH10 = "CH10: "+ctx->NameP[10];	m_Amp10.SetWindowText("Amp.10");
-	m_CH11 = "CH11: "+ctx->NameP[11];	m_Amp11.SetWindowText("Amp.11");
-	m_CH12 = "CH12: "+ctx->NameP[12];	m_Amp12.SetWindowText("Amp.12");
-	m_CH13 = "CH13: "+ctx->NameP[13];	m_Amp13.SetWindowText("Amp.13");
-	m_CH14 = "CH14: "+ctx->NameP[14];	m_Amp14.SetWindowText("Amp.14");
-	m_CH15 = "CH15: "+ctx->NameP[15];	m_Amp15.SetWindowText("Amp.15");
+	m_CH00 = FormatChannelLabel(0, ctx->NameP[0]);	m_Amp00.SetWindowText("Amp.00");
+	m_CH01 = FormatChannelLabel(1, ctx->NameP[1]);	m_Amp01.SetWindowText("Amp.01");
+	m_CH02 = FormatChannelLabel(2, ctx->NameP[2]);	m_Amp02.SetWindowText("Amp.02");
+	m_CH03 = FormatChannelLabel(3, ctx->NameP[3]);	m_Amp03.SetWindowText("Amp.03");
+	m_CH04 = FormatChannelLabel(4, ctx->NameP[4]);	m_Amp04.SetWindowText("Amp.04");
+	m_CH05 = FormatChannelLabel(5, ctx->NameP[5]);	m_Amp05.SetWindowText("Amp.05");
+	m_CH06 = FormatChannelLabel(6, ctx->NameP[6]);	m_Amp06.SetWindowText("Amp.06");
+	m_CH07 = FormatChannelLabel(7, ctx->NameP[7]);	m_Amp07.SetWindowText("Amp.07");
+	m_CH08 = FormatChannelLabel(8, ctx->NameP[8]);	m_Amp08.SetWindowText("Amp.08");
+	m_CH09 = FormatChannelLabel(9, ctx->NameP[9]);	m_Amp09.SetWindowText("Amp.09");
+	m_CH10 = FormatChannelLabel(10, ctx->NameP[10]);	m_Amp10.SetWindowText("Amp.10");
+	m_CH11 = FormatChannelLabel(11, ctx->NameP[11]);	m_Amp11.SetWindowText("Amp.11");
+	m_CH12 = FormatChannelLabel(12, ctx->NameP[12]);	m_Amp12.SetWindowText("Amp.12");
+	m_CH13 = FormatChannelLabel(13, ctx->NameP[13]);	m_Amp13.SetWindowText("Amp.13");
+	m_CH14 = FormatChannelLabel(14, ctx->NameP[14]);	m_Amp14.SetWindowText("Amp.14");
+	m_CH15 = FormatChannelLabel(15, ctx->NameP[15]);	m_Amp15.SetWindowText("Amp.15");
 	m_CFA00=ctx->ai.cal.a[0];	m_CFB00=ctx->ai.cal.b[0];	m_CFC00=ctx->ai.cal.c[0];	m_CFP00.Format("%11.5f",ctx->ai.phy[0]);
 	m_CFA01=ctx->ai.cal.a[1];	m_CFB01=ctx->ai.cal.b[1];	m_CFC01=ctx->ai.cal.c[1];	m_CFP01.Format("%11.5f",ctx->ai.phy[1]);
 	m_CFA02=ctx->ai.cal.a[2];	m_CFB02=ctx->ai.cal.b[2];	m_CFC02=ctx->ai.cal.c[2];	m_CFP02.Format("%11.5f",ctx->ai.phy[2]);

@@ -66,9 +66,6 @@ protected:
 	afx_msg void OnControlGeneral();
 	afx_msg void OnSpecimenData();
 	afx_msg void OnCalibrationFactor();
-	afx_msg void OnSamplingSettings();
-	afx_msg void OnBoardSettings();
-	afx_msg void OnRs232cPannel();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

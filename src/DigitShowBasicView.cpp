@@ -25,8 +25,6 @@
 #include "DigitShowBasicView.h"
 #include "DigitShowContext.h"
 
-#include "SamplingSettings.h"
-
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -642,17 +640,59 @@ void CDigitShowBasicView::OnBUTTONSetSamplingTime()
 	}	
 }
 
+static CString FormatViewChannelLabel(int ch, const CString& name)
+{
+	CString trimmed = name;
+	trimmed.Trim();
+	CString defaultName;
+	defaultName.Format(_T("CH%d"), ch);
+
+	if (trimmed.IsEmpty() || trimmed.CompareNoCase(_T("None")) == 0 || trimmed.CompareNoCase(defaultName) == 0) {
+		CString str;
+		str.Format(_T("%02d:"), ch);
+		return str;
+	}
+	CString str;
+	str.Format(_T("%02d: %s"), ch, (LPCTSTR)trimmed);
+	return str;
+}
+
 void CDigitShowBasicView::Reflesh()
 {	DigitShowContext* ctx = GetContext();
 	m_DChannel = "Ch.00-15";
-	m_VLT00 = ctx->NameV[0]; m_VLT01 = ctx->NameV[1]; m_VLT02 = ctx->NameV[2]; m_VLT03 = ctx->NameV[3];
-	m_VLT04 = ctx->NameV[4]; m_VLT05 = ctx->NameV[5]; m_VLT06 = ctx->NameV[6]; m_VLT07 = ctx->NameV[7];
-	m_VLT08 = ctx->NameV[8]; m_VLT09 = ctx->NameV[9]; m_VLT10 = ctx->NameV[10]; m_VLT11 = ctx->NameV[11];
-	m_VLT12 = ctx->NameV[12]; m_VLT13 = ctx->NameV[13]; m_VLT14 = ctx->NameV[14]; m_VLT15 = ctx->NameV[15];
-	m_PHY00 = ctx->NameP[0]; m_PHY01 = ctx->NameP[1]; m_PHY02 = ctx->NameP[2]; m_PHY03 = ctx->NameP[3];
-	m_PHY04 = ctx->NameP[4]; m_PHY05 = ctx->NameP[5]; m_PHY06 = ctx->NameP[6]; m_PHY07 = ctx->NameP[7];
-	m_PHY08 = ctx->NameP[8]; m_PHY09 = ctx->NameP[9]; m_PHY10 = ctx->NameP[10]; m_PHY11 = ctx->NameP[11];
-	m_PHY12 = ctx->NameP[12]; m_PHY13 = ctx->NameP[13]; m_PHY14 = ctx->NameP[14]; m_PHY15 = ctx->NameP[15];
+	m_VLT00 = FormatViewChannelLabel(0, ctx->NameV[0]);
+	m_VLT01 = FormatViewChannelLabel(1, ctx->NameV[1]);
+	m_VLT02 = FormatViewChannelLabel(2, ctx->NameV[2]);
+	m_VLT03 = FormatViewChannelLabel(3, ctx->NameV[3]);
+	m_VLT04 = FormatViewChannelLabel(4, ctx->NameV[4]);
+	m_VLT05 = FormatViewChannelLabel(5, ctx->NameV[5]);
+	m_VLT06 = FormatViewChannelLabel(6, ctx->NameV[6]);
+	m_VLT07 = FormatViewChannelLabel(7, ctx->NameV[7]);
+	m_VLT08 = FormatViewChannelLabel(8, ctx->NameV[8]);
+	m_VLT09 = FormatViewChannelLabel(9, ctx->NameV[9]);
+	m_VLT10 = FormatViewChannelLabel(10, ctx->NameV[10]);
+	m_VLT11 = FormatViewChannelLabel(11, ctx->NameV[11]);
+	m_VLT12 = FormatViewChannelLabel(12, ctx->NameV[12]);
+	m_VLT13 = FormatViewChannelLabel(13, ctx->NameV[13]);
+	m_VLT14 = FormatViewChannelLabel(14, ctx->NameV[14]);
+	m_VLT15 = FormatViewChannelLabel(15, ctx->NameV[15]);
+
+	m_PHY00 = FormatViewChannelLabel(0, ctx->NameP[0]);
+	m_PHY01 = FormatViewChannelLabel(1, ctx->NameP[1]);
+	m_PHY02 = FormatViewChannelLabel(2, ctx->NameP[2]);
+	m_PHY03 = FormatViewChannelLabel(3, ctx->NameP[3]);
+	m_PHY04 = FormatViewChannelLabel(4, ctx->NameP[4]);
+	m_PHY05 = FormatViewChannelLabel(5, ctx->NameP[5]);
+	m_PHY06 = FormatViewChannelLabel(6, ctx->NameP[6]);
+	m_PHY07 = FormatViewChannelLabel(7, ctx->NameP[7]);
+	m_PHY08 = FormatViewChannelLabel(8, ctx->NameP[8]);
+	m_PHY09 = FormatViewChannelLabel(9, ctx->NameP[9]);
+	m_PHY10 = FormatViewChannelLabel(10, ctx->NameP[10]);
+	m_PHY11 = FormatViewChannelLabel(11, ctx->NameP[11]);
+	m_PHY12 = FormatViewChannelLabel(12, ctx->NameP[12]);
+	m_PHY13 = FormatViewChannelLabel(13, ctx->NameP[13]);
+	m_PHY14 = FormatViewChannelLabel(14, ctx->NameP[14]);
+	m_PHY15 = FormatViewChannelLabel(15, ctx->NameP[15]);
 	UpdateData(FALSE);
 }
 

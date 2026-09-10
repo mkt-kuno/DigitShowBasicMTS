@@ -135,7 +135,6 @@ public:
 	CString	m_CH13;
 	CString	m_CH14;
 	CString	m_CH15;
-	CString	m_DChannel;
 	//}}AFX_DATA
 
 
@@ -186,7 +185,6 @@ protected:
 	afx_msg void OnBUTTONAmp15();
 	afx_msg void OnBUTTONCFSave();
 	afx_msg void OnBUTTONCFLoadFile();
-	afx_msg void OnBUTTONChannel();
 	virtual BOOL OnInitDialog();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
