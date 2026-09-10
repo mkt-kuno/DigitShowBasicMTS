@@ -1,14 +1,14 @@
-# DigitShowBasicTS - 中空ねじり三軸試験版 (OpenSource Edition, for CONTEC)
+# DigitShowBasicMTS - 中空ねじり三軸試験版 (OpenSource Edition, for Modbus RTU)
 
-![Github License](https://img.shields.io/github/license/mkt-kuno/DigitShowBasicTS)  [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) 
+![Github License](https://img.shields.io/github/license/mkt-kuno/DigitShowBasicMTS)  [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) 
 
 <img width="1021" height="722" alt="Screenshot 2026-08-22 205927" src="https://github.com/user-attachments/assets/ce4530ed-263e-4517-8498-f80bac3726bd" />
 
 ## 簡単な説明
 東京大学の地盤研で使用されている、中空ねじり三軸試験機制御ソフトウェアのオープンソース版です。  
 [DigitShowBasic](https://github.com/mkt-kuno/DigitShowBasic)を中空ねじり三軸試験用に拡張した版で、中空円筒供試体に軸荷重とねじりトルクを独立して負荷します。  
-ContecのAD/DAボードで動作させることを前提としています。  
-ModbusRTUのAD/DAは[DigitShowBasicM](https://github.com/mkt-kuno/DigitShowBasicM)まで。  
+Modbus RTU接続のAD/DA装置で動作させることを前提としています。  
+[DigitShowBasicM](https://github.com/mkt-kuno/DigitShowBasicM)のModbus RTU実装パターンをベースに、中空ねじり三軸試験向けのチャンネル割り当てへ移植しています。  
 このリポジトリのライセンスは **GPLv3** となっているため、注意してください。  
 
 ## 動作環境
@@ -16,8 +16,10 @@ ModbusRTUのAD/DAは[DigitShowBasicM](https://github.com/mkt-kuno/DigitShowBasic
 x64のみ
 - Visual Studio 2022
 Community版でOK, MFCライブラリ必須  
-- CONTEC API-AIO(WDM) Ver.9.20 
-適宜、CAIO.H, CAIO.LIBを置き換えて使用するDLLバージョン一致させれば最新版でも可。
+- Modbus RTU対応シリアル接続 (COMポート)
+  - 38400 bps / 8N1
+  - AI: Function Code 0x04, 16ch int16 input registers (HX711 ch0-7 / ADS1115 ch8-15)
+  - AO: Function Code 0x10, 8ch uint16 holding registers (GP8403, 0-10000 mV)
 - CPU: x64 Intel/AMD問わず  
 [Passmark性能(マルチスレッド)](https://www.cpubenchmark.net/multithread/) 最低5000 推奨8000以上
 - RAM: 最低4GB 推奨8GB以上  
@@ -48,7 +50,7 @@ GPLv3とは何か知ったうえで、覚悟して使い始めてください。
 デバッガ、コーダ、メンテナ、などなどが複数人、現れた場合のみ、管理・サポートを行おうと思います。  
 「どう使うの？」「ボードが認識しない」「設定方法を教えてほしい」などの初歩的な質問は避けてください。無視します。  
 「うちのコードとかなり違う」「そもそも動作しないし落ちる」などの場合は、  
-AI協業でリファクタリングする前の[legacy版](https://github.com/mkt-kuno/DigitShowBasicTS/tree/legacy)で試してみて下さい。  
+AI協業でリファクタリングする前の[legacy版](https://github.com/mkt-kuno/DigitShowBasicMTS/tree/legacy)で試してみて下さい。  
 「初期設定や困った部分を文章化したので載せてほしい」「AIOボードの初期化を自動にしたコードをマージしてほしい」など、  
 貢献する意思のある、オープンソースの理念に沿った要求は大歓迎します。  
 「根幹設計から新しいの作りたい」というやる気とコーディング能力のある方は、  
@@ -66,21 +68,41 @@ AI協業でリファクタリングする前の[legacy版](https://github.com/mk
 
 ## 技術的特記事項
 
-### ADC 全16チャンネル直接取得
+### Modbus RTU I/O 仕様
+- 通信設定: **38400 bps / 8N1**
+- COMポート名でオープンします（例: `COM3`）
+- AIは **16ch の int16 入力レジスタ**を Function Code **0x04** で一括読取
+  - ch0-7: HX711
+  - ch8-15: ADS1115
+- AOは **8ch の uint16 保持レジスタ**を Function Code **0x10** で一括書込
+  - ch0-7: GP8403
+  - 値は **mV単位 0-10000** に丸め・クランプ
 
-従来、クロストーク対策として奇数チャンネルをGNDに落とし、偶数チャンネル16本のみ取得する
-32チャンネルモード（`Channels/2` 間引き）を採用していた。
-本方式を廃止し、AIOボードの有効チャンネルすべてを直接取得する。
-（2枚構成の場合は Ch.00–15 / Ch.16–31 の最大32チャンネル。）
+### AO チャンネル割り当て
+- ch0: Axial Motor ON/OFF
+- ch1: Axial Motor UP/DOWN
+- ch2: Axial Motor Speed
+- ch3: EP Cell Pressure
+- ch4: EP Axis Pressure
+- ch5: Torsional Motor ON/OFF
+- ch6: Torsional Motor CW/CCW
+- ch7: Torsional Motor Speed
 
-### AIスキャンクロックの自動設定
+### AI チャンネル割り当て
+- ch0: V.Load
+- ch1: V.Disp
+- ch2: LDT1
+- ch3: LDT2
+- ch4: T.Load
+- ch5: CG1
+- ch6: CG2
+- ch7: CG3
+- ch8: HCDPT
+- ch9: LCDPT
+- ch10: T.Disp
+- ch11-ch15: 予備
 
-比較的新しいCONTECドライバでは、AI計測開始前に必ず `AioSetAiScanClock()` を設定する必要がある。
-ScanClock = SamplingClock ÷ 有効チャンネル数 を**切り捨てて**設定する（例: 1,000 µs ÷ 16 ch = 62.5 → **62 µs**）。
-短い方向（高周波側）に丸めることで、ボードの内部クロックが目標周期を超えず初期化エラーを防ぐ。
-本ソフトウェアは起動時およびサンプリング設定変更時に自動設定する。
-
-### Contecボードのデバイス名
-ADボードのデバイス名と`AIO000`,DAボードのデバイス名`AIO001`に固定しています。  
-デバイスマネージャで確認して、もし異なっている場合は、デバイス名を変更してください。  
-変更できない場合は、非表示のデバイスを表示するの、該当デバイス名を占有したAIOボードが見つかるはずです。  
+### 補足
+- 旧CONTEC/CAIO向けのFIFOバッファ計測は廃止し、Timerごとの**ポーリング読取**へ変更しました。
+- 現状の実装では **EP Axis Pressure(ch4)** は **EP Cell Pressure(ch3)** の指令値を既定でミラーします。
+- 旧POT1/POT2の2系統回転計測は、新しい暫定AIマップの **T.Disp(ch10)** 1系統へ集約しています。

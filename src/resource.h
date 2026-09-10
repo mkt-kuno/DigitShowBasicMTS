@@ -253,7 +253,6 @@
 #define IDC_BUTTON_BeConsol             1621
 #define IDC_EDIT_u2                     1621
 #define IDC_BUTTON_AfConsolidation      1622
-#define IDC_BUTTON_InterceptSave        1708
 #define IDC_BUTTON_ToPresent1           1712
 #define IDC_BUTTON_ToPresent2           1713
 #define IDC_BUTTON_ToPresent3           1714
@@ -339,9 +338,6 @@
 #define IDC_COMBO_SamplingTime          1982
 #define IDC_BUTTON_SetCtrlID            1983
 #define IDC_BUTTON_SetSamplingTime      1984
-#define IDC_BUTTON_FIFOStart            2016
-#define IDC_BUTTON_FIFOStop             2017
-#define IDC_BUTTON_WriteData            2018
 #define IDC_EDIT_TimeInterval1          2019
 #define IDC_EDIT_TimeInterval2          2020
 #define IDC_EDIT_TimeInterval3          2021
@@ -398,7 +394,6 @@
 #define IDC_STATIC_PHY15                2069
 #define IDC_STATIC_PHY00                2070
 #define IDC_EDIT_DChannel               2071
-#define IDC_BUTTON_DChannel             2072
 #define IDC_STATIC_CH01                 2073
 #define IDC_STATIC_CH02                 2074
 #define IDC_STATIC_CH03                 2075

@@ -75,7 +75,7 @@ void CCalibrationAmp::OnBUTTONAmpBase()
 	// TODO: この位置にコントロール通知ハンドラ用のコードを追加してください
 	UpdateData(TRUE);
 	pDoc->AD_INPUT();
-	m_AmpVB=ctx->ai.raw[ctx->AmpID-1];
+	if(ctx->AmpID >= 1 && ctx->AmpID <= AI_MAX_CHANNELS) m_AmpVB=ctx->ai.raw[ctx->AmpID-1];
 	UpdateData(FALSE);	
 }
 
@@ -84,7 +84,7 @@ void CCalibrationAmp::OnBUTTONAmpOffset()
 	// TODO: この位置にコントロール通知ハンドラ用のコードを追加してください
 	UpdateData(TRUE);
 	pDoc->AD_INPUT();
-	m_AmpVO=ctx->ai.raw[ctx->AmpID-1];
+	if(ctx->AmpID >= 1 && ctx->AmpID <= AI_MAX_CHANNELS) m_AmpVO=ctx->ai.raw[ctx->AmpID-1];
 	UpdateData(FALSE);	
 }
 
@@ -101,3 +101,4 @@ void CCalibrationAmp::OnBUTTONAmpUpdate()
 		AfxMessageBox("Get calibration factors!",MB_ICONEXCLAMATION | MB_OK );
 	}	
 }
+

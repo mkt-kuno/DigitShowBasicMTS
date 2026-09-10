@@ -1,10 +1,10 @@
-# AGENTS.md
+﻿# AGENTS.md
 
 ## Project summary
 
 - This repository is a **Windows MFC SDI desktop app** controlling a **hollow torsional shear triaxial test apparatus** (axial load and torque applied independently to a hollow cylinder specimen).
 - Toolchain assumptions are **Visual Studio 2022 + MFC (dynamic)**, toolset `v143`, **MBCS / MultiByte** (`CharacterSet=MultiByte`, *not* Unicode). Win32 and x64 configurations exist; **x64 is the primary target**.
-- AD/DA communication is implemented through the **CONTEC AIO-WDM driver (CAIO API)** via `src/caio.lib` / `src/CAIO.H`.
+- AD/DA communication is implemented through a **Modbus RTU serial driver** via `src/ModbusRTU.cpp` / `src/ModbusRTU.h`.
 - Derived from DigitShowBasic. Licensed under **GPLv3**.
 
 ## Build / test / lint
@@ -14,11 +14,11 @@
 From repository root:
 
 ```powershell
-& "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" "DigitShowBasicTS.sln" /p:Configuration=Debug /p:Platform=x64 /nologo
+& "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" "DigitShowBasicMTS.sln" /p:Configuration=Debug /p:Platform=x64 /nologo
 ```
 
 ```powershell
-& "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" "DigitShowBasicTS.sln" /p:Configuration=Release /p:Platform=x64 /nologo
+& "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" "DigitShowBasicMTS.sln" /p:Configuration=Release /p:Platform=x64 /nologo
 ```
 
 ### Test
@@ -49,7 +49,7 @@ A change counts as complete only after a clean build (**0 errors**) with the Rel
 
 - `DigitShowContext` (`DigitShowContext.h`) is a lazily initialized global singleton via `GetContext()`.
 - Each function that needs state starts with `DigitShowContext* ctx = GetContext();`.
-- Hardware board handles are stored in `ctx->ad[i].Id` (AI board `"AIO000"`, up to 2 boards) and `ctx->da[0].Id` (AO board `"AIO001"`).
+- Runtime I/O state is stored in `DigitShowContext`; connection state uses `ctx->flags.SetBoard`, and transport is managed through `GetModbusInstance()`.
 - Do **not** reintroduce file-scope globals or `extern` declarations; add fields to `DigitShowContext` instead.
 
 ### Hardware
@@ -82,15 +82,16 @@ A control number of **0 must stop loading** — do not let new modes break that 
 
 | CH | Signal |
 |---|---|
-| CH00 | EP cell pressure |
-| CH01 | Axial motor On/Off (0 V = On, 5 V = Off) |
-| CH02 | Axial clutch |
-| CH03 | Axial motor speed |
-| CH04 | Torsion motor On/Off (0 V = On, 5 V = Off) |
-| CH05 | Torsion clutch |
-| CH06 | Torsion motor speed |
+| CH00 | Axial motor On/Off (0 V = Off, 5 V = On) |
+| CH01 | Axial direction (Clutch) (0 V = Down, 5 V = Up) |
+| CH02 | Axial motor speed |
+| CH03 | EP cell pressure |
+| CH04 | EP axial pressure (mirrors EP cell) |
+| CH05 | Torsion motor On/Off (0 V = Off, 5 V = On) |
+| CH06 | Torsion direction (Clutch) (0 V = CW, 5 V = CCW) |
+| CH07 | Torsion motor speed |
 
-Channel indices live in `CH_Axis*` / `CH_Torsion*` members of `CDigitShowBasicDoc` (`DigitShowBasicDoc.cpp`). DA calibration factors per channel are set as `DA_Cal_a[]` / `DA_Cal_b[]` (e.g., torsion speed in V/RPM).
+Channel indices are defined via `#define DA_CH_*` in `src/DigitShowContext.h` and accessed via `ctx->daCh.*`. DA calibration factors per channel are set as `ctx->ao.cal.a[]` / `ctx->ao.cal.b[]`.
 
 ### AI channel assignments (`NameV[]` / `NameP[]`, up to 32 ch)
 
@@ -106,12 +107,11 @@ Primary board (typical wiring): CH0 vertical load [N], CH1 torque [Ncm], CH2/CH3
 
 1. **File encoding is UTF-8 with BOM (`EF BB BF`).** All `.cpp/.h/.rc/.rc2` files are saved as UTF-8 with BOM, and the resource files use `#pragma code_page(65001)` (including inside the TEXTINCLUDE sections). Do not save as Shift-JIS or without a BOM; editors that silently drop the BOM on "save" must not be used for these files. Verify the first three bytes are `0xEF 0xBB 0xBF` after editing.
 
-2. **Do not write DA output directly from dialogs/control logic.** Control code updates `ctx->ao.raw[]` (in volts). Actual hardware writes happen in `DA_OUTPUT()` via the CAIO API.
+2. **Do not write DA output directly from dialogs/control logic.** Control code updates `ctx->ao.raw[]` (in volts). Actual hardware writes happen in `DA_OUTPUT()` via the Modbus RTU driver.
 
-3. **Board lifecycle safety:** boards are opened once (`AioInit`) and closed at exit; keep AO outputs zeroed before open/close where possible.
+3. **Board lifecycle safety:** the Modbus serial connection is opened once and closed at exit; keep AO outputs zeroed before open/close where possible.
 
-4. **`caio.lib` version must match the installed AIO-WDM driver.** `caio.lib` is a static import library calling `caio.dll` provided by the driver. The files in `src/` conform to **CONTEC API-AIO(WDM) Ver.9.20** (same as DigitShowBasic). If you upgrade the driver, replace `src/caio.lib` / `src/CAIO.H` with the ones from the new driver package; mismatches cause link errors or runtime crashes.
+4. **Modbus transport settings are fixed.** Keep the protocol unchanged: 16 AI input registers via function code `0x04`, 8 AO holding registers via function code `0x10`, 38400 bps / 8N1, CRC16, COM port open by name.
 
-5. **Newer CONTEC drivers require an explicit AI scan clock.** Always call `AioSetAiScanClock()` with `floor(SamplingClock / enabled channel count)` µs (e.g., 1000 µs / 16 ch → 62 µs, rounded down to the safe side) *before* starting acquisition; the driver no longer derives it reliably from the sampling clock alone.
 
 5. **No comments-in-code policy for new work is not enforced here** — this is legacy MFC code; match surrounding style instead.

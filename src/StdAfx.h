@@ -27,6 +27,12 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
+// Target Windows 10 or later for high-DPI support
+#include <SDKDDKVer.h>
+#ifndef _WIN32_WINNT
+#define _WIN32_WINNT 0x0A00
+#endif
+
 #define VC_EXTRALEAN		// Windows ヘッダーから殆ど使用されないスタッフを除外します。
 
 #include <afxwin.h>         // MFC のコアおよび標準コンポーネント

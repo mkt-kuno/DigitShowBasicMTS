@@ -21,28 +21,30 @@
   <PropertyGroup Label="Globals">
     <Keyword>MFCProj</Keyword>
     <ProjectGuid>{C728B239-D2E5-458B-B30F-7773C30484DA}</ProjectGuid>
+    <RootNamespace>DigitShowBasicMTS</RootNamespace>
+    <ProjectName>DigitShowBasicMTS</ProjectName>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <UseOfMfc>Dynamic</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <UseOfMfc>Dynamic</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <UseOfMfc>Dynamic</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <UseOfMfc>Dynamic</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -81,7 +83,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AssemblerListingLocation>.\Debug\</AssemblerListingLocation>
       <BrowseInformation>true</BrowseInformation>
-      <PrecompiledHeaderOutputFile>.\Debug\DigitShowBasic.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderOutputFile>.\Debug\DigitShowBasicMTS.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <ObjectFileName>.\Debug\</ObjectFileName>
@@ -91,7 +93,7 @@
     <Midl>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <TypeLibraryName>.\Debug\DigitShowBasic.tlb</TypeLibraryName>
+      <TypeLibraryName>.\Debug\DigitShowBasicMTS.tlb</TypeLibraryName>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
     </Midl>
@@ -101,13 +103,13 @@
     </ResourceCompile>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Debug\DigitShowBasic.bsc</OutputFile>
+      <OutputFile>.\Debug\DigitShowBasicMTS.bsc</OutputFile>
     </Bscmake>
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
-      <OutputFile>.\Debug\DigitShowBasic.exe</OutputFile>
+      <OutputFile>.\Debug\DigitShowBasicMTS.exe</OutputFile>
       <StackReserveSize>67108864</StackReserveSize>
     </Link>
   </ItemDefinitionGroup>
@@ -122,7 +124,7 @@
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AssemblerListingLocation>.\Release\</AssemblerListingLocation>
-      <PrecompiledHeaderOutputFile>.\Release\DigitShowBasic.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderOutputFile>.\Release\DigitShowBasicMTS.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <ObjectFileName>.\Release\</ObjectFileName>
@@ -131,7 +133,7 @@
     <Midl>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <TypeLibraryName>.\Release\DigitShowBasic.tlb</TypeLibraryName>
+      <TypeLibraryName>.\Release\DigitShowBasicMTS.tlb</TypeLibraryName>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
     </Midl>
@@ -141,12 +143,12 @@
     </ResourceCompile>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Release\DigitShowBasic.bsc</OutputFile>
+      <OutputFile>.\Release\DigitShowBasicMTS.bsc</OutputFile>
     </Bscmake>
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <SubSystem>Windows</SubSystem>
-      <OutputFile>.\Release\DigitShowBasic.exe</OutputFile>
+      <OutputFile>.\Release\DigitShowBasicMTS.exe</OutputFile>
       <StackReserveSize>67108864</StackReserveSize>
     </Link>
   </ItemDefinitionGroup>
@@ -167,7 +169,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BoardSettings.cpp" />
     <ClCompile Include="CalibrationAmp.cpp" />
     <ClCompile Include="CalibrationFactor.cpp" />
     <ClCompile Include="Control_Consolidation.cpp" />
@@ -182,7 +183,7 @@
     <ClCompile Include="DigitShowBasicView.cpp" />
     <ClCompile Include="DigitShowContext.cpp" />
     <ClCompile Include="MainFrm.cpp" />
-    <ClCompile Include="SamplingSettings.cpp" />
+    <ClCompile Include="ModbusRTU.cpp" />
     <ClCompile Include="Specimen.cpp" />
     <ClCompile Include="StdAfx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -195,7 +196,6 @@
     <ResourceCompile Include="DigitShowBasic.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BoardSettings.h" />
     <ClInclude Include="CalibrationAmp.h" />
     <ClInclude Include="CalibrationFactor.h" />
     <ClInclude Include="Control_Consolidation.h" />
@@ -211,23 +211,20 @@
     <ClInclude Include="DigitShowBasicDoc.h" />
     <ClInclude Include="DigitShowBasicView.h" />
     <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="ModbusRTU.h" />
     <ClInclude Include="Resource.h" />
-    <ClInclude Include="SamplingSettings.h" />
     <ClInclude Include="Specimen.h" />
     <ClInclude Include="StdAfx.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\DigitShowBasicTS.ico" />
-    <Image Include="res\DigitShowBasicTSDoc.ico" />
+    <Image Include="res\DigitShowBasicMTS.ico" />
+    <Image Include="res\DigitShowBasicMTSDoc.ico" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="res\DigitShowBasic.rc2" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="Caio.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -67,8 +67,6 @@ public:
 	void MonotonicTorsionalLoading();
 	void EffectiveStressPathLoading();
 	void FileControlableConsolidation();
-	void SaveToFile2();
-	void Allocate_Memory();
 	void Stop_Control();
 	void CloseBoard();
 	void OpenBoard();

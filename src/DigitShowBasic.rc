@@ -1,5 +1,7 @@
 ﻿// Microsoft Visual C++ generated resource script.
 //
+#pragma code_page(65001)
+
 #include "resource.h"
 
 #define APSTUDIO_READONLY_SYMBOLS
@@ -17,7 +19,6 @@
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
 LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
-#pragma code_page(65001)
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -49,7 +50,7 @@ BEGIN
     "#pragma code_page(65001)\r\n"
     "#endif //_WIN32\r\n"
     "#include ""res\\DigitShowBasic.rc2""  // Microsoft Visual C++ ?E?O?I?c?[???A?O?W?3?e?????\\?[?X\r\n"
-    "#include ""l.jpn\\afxres.rc""          // ?W???I?R?“?|?[?l?“?g\r\n"
+    "#include ""l.jpn\\afxres.rc""          // ?W???I?R?â€œ?|?[?l?â€œ?g\r\n"
     "#endif\r\n"
     "\0"
 END
@@ -64,9 +65,9 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDR_MAINFRAME           ICON                    "res\\DigitShowBasicTS.ico"
+IDR_MAINFRAME           ICON                    "res\\DigitShowBasicMTS.ico"
 
-IDR_DIGITSTYPE          ICON                    "res\\DigitShowBasicTSDoc.ico"
+IDR_DIGITSTYPE          ICON                    "res\\DigitShowBasicMTSDoc.ico"
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -79,11 +80,6 @@ BEGIN
     POPUP "File(&F)"
     BEGIN
         MENUITEM "Close application(&X)",       ID_APP_EXIT
-    END
-    POPUP "View"
-    BEGIN
-        MENUITEM "Board Settings",              ID_BoardSettings
-        MENUITEM "Sampling Settings",           ID_SamplingSettings
     END
     POPUP "Calibration"
     BEGIN
@@ -143,12 +139,12 @@ END
 
 IDD_ABOUTBOX DIALOGEX 0, 0, 235, 55
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "DigitShowBasic for Torsional Test"
+CAPTION "DigitShowBasicMTS for Torsional Test"
 FONT 9, "ＭＳ Ｐゴシック", 0, 0, 0x0
 BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
-    LTEXT           "Version Git feature/sanjei [f003241]",IDC_STATIC,40,11,119,8,SS_NOPREFIX
-    LTEXT           "Copyright (C) 2021",IDC_STATIC,40,25,119,8
+    LTEXT           "DigitShowBasicMTS Version 1.0.0",IDC_STATIC,40,11,119,8,SS_NOPREFIX
+    LTEXT           "Copyright (C) 2026",IDC_STATIC,40,25,119,8
     DEFPUSHBUTTON   "OK",IDOK,178,7,50,14,WS_GROUP
 END
 
@@ -270,7 +266,6 @@ BEGIN
     LTEXT           "ID_13: No Control,",IDC_STATIC,284,358,52,8
     LTEXT           "ID_14: No Control,",IDC_STATIC,284,374,52,8
     LTEXT           "ID_15: Control from file.",IDC_STATIC,284,390,69,8
-    PUSHBUTTON      "Intercepted Saving",IDC_BUTTON_InterceptSave,472,314,104,15
     GROUPBOX        "Settings of Control ID = 15.",IDC_STATIC,472,347,104,79
     LTEXT           "Step No.",IDC_STATIC,476,362,26,8
     LTEXT           "Control Pattern No.",IDC_STATIC,476,377,57,8
@@ -288,9 +283,6 @@ BEGIN
     PUSHBUTTON      "Set",IDC_BUTTON_SetCtrlID,106,281,24,14
     PUSHBUTTON      "Set",IDC_BUTTON_SetSamplingTime,106,297,24,14
     GROUPBOX        "Setting Control_ID and Sampling Time",IDC_STATIC,6,271,127,60
-    PUSHBUTTON      "Start FIFO",IDC_BUTTON_FIFOStart,472,331,35,14
-    PUSHBUTTON      "Stop FIFO",IDC_BUTTON_FIFOStop,507,331,35,14
-    PUSHBUTTON      "Write data",IDC_BUTTON_WriteData,541,331,35,14
     CTEXT           "Static",IDC_STATIC_VLT00,16,21,55,8
     CTEXT           "Static",IDC_STATIC_VLT01,80,21,58,8
     CTEXT           "Static",IDC_STATIC_VLT02,152,21,57,8
@@ -325,41 +317,6 @@ BEGIN
     CTEXT           "Static",IDC_STATIC_PHY15,504,127,54,8
     LTEXT           "Displayed channel",IDC_STATIC,12,315,54,8
     EDITTEXT        IDC_EDIT_DChannel,72,313,33,14,ES_CENTER | ES_AUTOHSCROLL | ES_READONLY
-    PUSHBUTTON      "Change",IDC_BUTTON_DChannel,106,313,24,14
-END
-
-IDD_SamplingSettings DIALOG 0, 0, 219, 257
-STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Sampling Conditions"
-FONT 9, "ＭＳ Ｐゴシック"
-BEGIN
-    DEFPUSHBUTTON   "OK",IDOK,86,235,50,14
-    GROUPBOX        "Sampling Settings of Timer",IDC_STATIC,7,7,205,65
-    LTEXT           "Time Interval (ms) to display",IDC_STATIC,12,21,86,8
-    LTEXT           "Time Interval (ms) to feed back",IDC_STATIC,12,38,94,8
-    LTEXT           "Time Interval (ms) to save data",IDC_STATIC,12,55,94,8
-    EDITTEXT        IDC_EDIT_TimeInterval1,109,18,40,14,ES_RIGHT | ES_AUTOHSCROLL | ES_READONLY
-    EDITTEXT        IDC_EDIT_TimeInterval2,109,35,40,14,ES_RIGHT | ES_AUTOHSCROLL | ES_READONLY
-    EDITTEXT        IDC_EDIT_TimeInterval3,109,52,40,14,ES_RIGHT | ES_AUTOHSCROLL | ES_READONLY
-    GROUPBOX        "Sampling Condition with FIFO Memory",IDC_STATIC,7,78,206,153
-    LTEXT           "Memory Type",IDC_STATIC,12,93,40,8
-    LTEXT           "Channels",IDC_STATIC,12,109,28,8
-    LTEXT           "EventSamplingTimes (n)",IDC_STATIC,12,126,72,8
-    EDITTEXT        IDC_EDIT_MemoryType,109,92,40,14,ES_RIGHT | ES_AUTOHSCROLL | ES_READONLY
-    EDITTEXT        IDC_EDIT_Channels,109,108,40,14,ES_RIGHT | ES_AUTOHSCROLL | ES_READONLY
-    EDITTEXT        IDC_EDIT_EventSamplingTimes,109,124,40,14,ES_RIGHT | ES_AUTOHSCROLL | ES_READONLY
-    LTEXT           "Number of data to average (n)",IDC_STATIC,12,143,90,8
-    EDITTEXT        IDC_EDIT_AvSmplNum,109,140,40,14,ES_RIGHT | ES_AUTOHSCROLL | ES_READONLY
-    LTEXT           "TotalSamplingTimes (n)",IDC_STATIC,12,161,70,8
-    LTEXT           "Allocated Memory (MB)",IDC_STATIC,12,177,70,8
-    LTEXT           "Sampling Clock (ms)",IDC_STATIC,12,194,62,8
-    EDITTEXT        IDC_EDIT_TotalSamplingTimes,109,157,40,14,ES_RIGHT | ES_AUTOHSCROLL | ES_READONLY
-    EDITTEXT        IDC_EDIT_AllocatedMemory,109,174,40,14,ES_RIGHT | ES_AUTOHSCROLL | ES_READONLY
-    EDITTEXT        IDC_EDIT_SamplingClock,109,191,40,14,ES_RIGHT | ES_AUTOHSCROLL
-    LTEXT           "Saving Time (s)",IDC_STATIC,12,211,47,8
-    EDITTEXT        IDC_EDIT_SavingTime,109,208,40,14,ES_RIGHT | ES_AUTOHSCROLL
-    PUSHBUTTON      "Check",IDC_BUTTON_Check,158,93,50,14
-    PUSHBUTTON      "Cancel",IDCANCEL,151,235,50,14
 END
 
 IDD_Calibration_Factor DIALOG 0, 0, 390, 325
@@ -485,9 +442,6 @@ BEGIN
     LTEXT           "CH14: GS2, mm",IDC_STATIC_CH14,11,285,101,8
     LTEXT           "CH15: GS3, mm",IDC_STATIC_CH15,11,301,101,8
     GROUPBOX        "Calibration factors",IDC_STATIC,7,38,376,279
-    GROUPBOX        "Displayed Channel",IDC_STATIC,7,7,124,29
-    EDITTEXT        IDC_EDIT_DChannel,12,17,56,14,ES_CENTER | ES_AUTOHSCROLL | ES_READONLY
-    PUSHBUTTON      "Change",IDC_BUTTON_Channel,73,17,50,14
 END
 
 IDD_Calibration_Amp DIALOG 0, 0, 187, 139
@@ -804,7 +758,7 @@ BEGIN
     LTEXT           "torsinal_speed, axial_speed, p', tan(2*alfa) )",IDC_STATIC,191,442,126,8
     LTEXT           "14: Cyclic Axial Loading OR",IDC_STATIC,11,450,388,8
     LTEXT           "( Loading:0.0/Unloading:1.0, sigma_z_lower, sigma_z_upper, epsilon_z_lower, epsilon_z_upper, Number, axial_speed)",IDC_STATIC,55,460,326,8
-    GROUPBOX        "Control No.",IDC_STATIC,9,195,414,302
+    GROUPBOX        "Control No.",IDC_STATIC,9,170,414,327
     LTEXT           "15: File-controlable Consolidation ( sigma_z_ini. sigma_r_ini, tau_zq_ini, sigma_z_end, sigma_r_end, tau_tzq_end, ",IDC_STATIC,11,474,318,8
     LTEXT           "axial_speed, torsional_speed, cell_pre_rate )",IDC_STATIC,137,483,126,8
 END
@@ -875,36 +829,6 @@ BEGIN
     LTEXT           "(RPM)",IDC_STATIC,132,55,19,8
 END
 
-IDD_BoardSettings DIALOG 0, 0, 201, 173
-STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Board Settings"
-FONT 9, "ＭＳ Ｐゴシック"
-BEGIN
-    DEFPUSHBUTTON   "Close",IDOK,144,153,50,14
-    LTEXT           "Input Method",IDC_STATIC,13,35,39,8
-    GROUPBOX        "A/D Board",IDC_STATIC,7,7,187,93
-    GROUPBOX        "D/A Board",IDC_STATIC,7,106,113,61
-    LTEXT           "Resolution",IDC_STATIC,13,51,32,8
-    LTEXT           "Range",IDC_STATIC,13,67,19,8
-    LTEXT           "Max.Channel",IDC_STATIC,13,84,38,8
-    EDITTEXT        IDC_EDIT_AdMethod1,59,32,57,14,ES_CENTER | ES_AUTOHSCROLL | ES_READONLY
-    EDITTEXT        IDC_EDIT_AdResolution1,59,49,57,14,ES_CENTER | ES_AUTOHSCROLL | ES_READONLY
-    EDITTEXT        IDC_EDIT_AdRange1,59,65,57,14,ES_CENTER | ES_AUTOHSCROLL | ES_READONLY
-    EDITTEXT        IDC_EDIT_AdMaxChannel1,59,81,57,14,ES_CENTER | ES_AUTOHSCROLL | ES_READONLY
-    LTEXT           "Resolution",IDC_STATIC,12,118,32,8
-    LTEXT           "Range",IDC_STATIC,12,134,19,8
-    LTEXT           "Max.Channel",IDC_STATIC,12,151,38,8
-    EDITTEXT        IDC_EDIT_DaResolution,56,116,57,14,ES_CENTER | ES_AUTOHSCROLL | ES_READONLY
-    EDITTEXT        IDC_EDIT_DaRange,56,133,57,14,ES_CENTER | ES_AUTOHSCROLL | ES_READONLY
-    EDITTEXT        IDC_EDIT_DaMaxChannel,56,149,57,14,ES_CENTER | ES_AUTOHSCROLL | ES_READONLY
-    LTEXT           "1st.",IDC_STATIC,82,20,11,8
-    EDITTEXT        IDC_EDIT_AdMethod2,130,32,57,14,ES_CENTER | ES_AUTOHSCROLL | ES_READONLY
-    EDITTEXT        IDC_EDIT_AdResolution2,130,50,57,14,ES_CENTER | ES_AUTOHSCROLL | ES_READONLY
-    EDITTEXT        IDC_EDIT_AdRange2,130,66,57,14,ES_CENTER | ES_AUTOHSCROLL | ES_READONLY
-    EDITTEXT        IDC_EDIT_AdMaxChannel2,130,82,57,14,ES_CENTER | ES_AUTOHSCROLL | ES_READONLY
-    LTEXT           "2nd.",IDC_STATIC,153,20,12,8
-END
-
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -928,12 +852,12 @@ BEGIN
     BEGIN
         BLOCK "041104b0"
         BEGIN
-            VALUE "FileDescription", "DigitShowBasicTS MFC ｱﾌﾟﾘｹｰｼｮﾝ"
+            VALUE "FileDescription", "DigitShowBasicMTS MFC ｱﾌﾟﾘｹｰｼｮﾝ"
             VALUE "FileVersion", "1, 0, 0, 1"
-            VALUE "InternalName", "DigitShowBasicTS"
+            VALUE "InternalName", "DigitShowBasicMTS"
             VALUE "LegalCopyright", "Copyright (C) 2001"
-            VALUE "OriginalFilename", "DigitShowBasicTS.EXE"
-            VALUE "ProductName", "DigitShowBasicTS ｱﾌﾟﾘｹｰｼｮﾝ"
+            VALUE "OriginalFilename", "DigitShowBasicMTS.EXE"
+            VALUE "ProductName", "DigitShowBasicMTS ｱﾌﾟﾘｹｰｼｮﾝ"
             VALUE "ProductVersion", "1, 0, 0, 1"
         END
     END
@@ -966,14 +890,6 @@ BEGIN
         TOPMARGIN, 7
         BOTTOMMARGIN, 437
         HORZGUIDE, 124
-    END
-
-    IDD_SamplingSettings, DIALOG
-    BEGIN
-        LEFTMARGIN, 7
-        RIGHTMARGIN, 212
-        TOPMARGIN, 7
-        BOTTOMMARGIN, 250
     END
 
     IDD_Calibration_Factor, DIALOG
@@ -1055,15 +971,6 @@ BEGIN
         TOPMARGIN, 7
         BOTTOMMARGIN, 106
     END
-
-    IDD_BoardSettings, DIALOG
-    BEGIN
-        LEFTMARGIN, 7
-        RIGHTMARGIN, 194
-        TOPMARGIN, 7
-        BOTTOMMARGIN, 166
-    END
-
 END
 #endif    // APSTUDIO_INVOKED
 
@@ -1096,7 +1003,7 @@ END
 
 STRINGTABLE
 BEGIN
-    IDR_MAINFRAME           "DigitShowBasicTS\n\nDigitS\n\n\nDigitShowBasic.Document\nDigitS Document"
+    IDR_MAINFRAME           "DigitShowBasicMTS\n\nDigitS\n\n\nDigitShowBasicMTS.Document\nDigitS Document"
 END
 
 STRINGTABLE
@@ -1214,8 +1121,8 @@ END
 LANGUAGE 17, 1
 #pragma code_page(65001)
 #endif //_WIN32
-#include "res\DigitShowBasic.rc2"  // Microsoft Visual C++ 以外のツールで編集されたリソース
-#include "l.jpn\afxres.rc"          // 標準のコンポーネント
+#include "res\DigitShowBasic.rc2"  // Microsoft Visual C++ ?E?O?I?c?[???A?O?W?3?e?????\?[?X
+#include "l.jpn\afxres.rc"          // ?W???I?R?窶・|?[?l?窶・g
 #endif
 
 /////////////////////////////////////////////////////////////////////////////

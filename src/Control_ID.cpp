@@ -237,8 +237,13 @@ void CControl_ID::OnBUTTONLoadfromfile()
 	    pFileName = CtlReadFile_dlg.GetPathName();	
 		FileCtlData = fopen((LPCSTR)pFileName , "r" );
 		for(i=0;i<16;i++){
-			fscanf(FileCtlData,"%d",&i);
-			fscanf(FileCtlData,"%d%d%d",&ctx->control[i].flag[0],&ctx->control[i].flag[1],&ctx->control[i].flag[2]);
+			int read_i = 0;
+			int flag0 = 0, flag1 = 0, flag2 = 0;
+			fscanf(FileCtlData,"%d",&read_i);
+			fscanf(FileCtlData,"%d%d%d",&flag0,&flag1,&flag2);
+			ctx->control[i].flag[0] = (flag0 != 0);
+			ctx->control[i].flag[1] = (flag1 != 0);
+			ctx->control[i].flag[2] = (flag2 != 0);
 			fscanf(FileCtlData,"%d%d%d",&ctx->control[i].time[0],&ctx->control[i].time[1],&ctx->control[i].time[2]);
 			fscanf(FileCtlData,"%lf%lf%lf",&ctx->control[i].p[0],&ctx->control[i].p[1],&ctx->control[i].p[2]);
 			fscanf(FileCtlData,"%lf%lf%lf",&ctx->control[i].q[0],&ctx->control[i].q[1],&ctx->control[i].q[2]);

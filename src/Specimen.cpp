@@ -299,9 +299,9 @@ void CSpecimen::OnBUTTONBeConsol()
 	ctx->specimen.HeightOutMembrane[2] = ctx->phys.height;
 	
 	//---Initialize Displacement transducer---
-	ctx->ai.cal.c[5] -= ctx->ai.phy[5]; // initialize ez
+	ctx->ai.cal.c[1] -= ctx->ai.phy[1]; // initialize ez
 	//ctx->ai.cal.c[18]=ctx->ai.cal.c[18]-ctx->ai.phy[18];
-	ctx->ai.cal.c[13] -= ctx->ai.phy[13]; // initialize ev
+	ctx->ai.cal.c[9] -= ctx->ai.phy[9]; // initialize ev
 	Load();
 	OnBUTTONToPresent2();
 }
@@ -324,9 +324,9 @@ void CSpecimen::OnBUTTONAfConsolidation()
 	ctx->specimen.HeightOutMembrane[3] = ctx->phys.height;
 
 	//---Initialize Displacement transducer---
-	ctx->ai.cal.c[5] -= ctx->ai.phy[5]; // initialize ez
+	ctx->ai.cal.c[1] -= ctx->ai.phy[1]; // initialize ez
 	//ctx->ai.cal.c[18]=ctx->ai.cal.c[18]-ctx->ai.phy[18];
-	ctx->ai.cal.c[13] -= ctx->ai.phy[13]; // initialize ev
+	ctx->ai.cal.c[9] -= ctx->ai.phy[9]; // initialize ev
 	Load();
 	OnBUTTONToPresent3();
 }
