@@ -140,7 +140,7 @@ END
 IDD_ABOUTBOX DIALOGEX 0, 0, 235, 55
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "DigitShowBasicMTS for Torsional Test"
-FONT 9, "ＭＳ Ｐゴシック", 0, 0, 0x0
+FONT 13, "ＭＳ Ｐゴシック", 0, 0, 0x0
 BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
     LTEXT           "DigitShowBasicMTS Version 1.0.0",IDC_STATIC,40,11,119,8,SS_NOPREFIX
@@ -150,7 +150,7 @@ END
 
 IDD_DIGITSHOWBASIC_FORM DIALOGEX 0, 0, 580, 444
 STYLE DS_SETFONT | WS_CHILD
-FONT 9, "ＭＳ Ｐゴシック", 0, 0, 0x0
+FONT 13, "ＭＳ Ｐゴシック", 0, 0, 0x0
 BEGIN
     GROUPBOX        "Voltage OutPut",IDC_STATIC,6,7,563,71
     EDITTEXT        IDC_EDIT_Vout00,15,29,56,15,ES_RIGHT | ES_AUTOHSCROLL
@@ -322,7 +322,7 @@ END
 IDD_Calibration_Factor DIALOG 0, 0, 390, 325
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Get Calibration Factors."
-FONT 9, "ＭＳ Ｐゴシック"
+FONT 13, "ＭＳ Ｐゴシック"
 BEGIN
     DEFPUSHBUTTON   "Close",IDOK,333,16,50,14
     LTEXT           "Statics",IDC_STATIC_CH00,11,62,101,8
@@ -447,7 +447,7 @@ END
 IDD_Calibration_Amp DIALOG 0, 0, 187, 139
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Get Amp. Condition"
-FONT 9, "ＭＳ Ｐゴシック"
+FONT 13, "ＭＳ Ｐゴシック"
 BEGIN
     DEFPUSHBUTTON   "Close",IDOK,119,110,50,14
     LTEXT           "Amp. No. :",IDC_STATIC,26,15,30,8
@@ -466,7 +466,7 @@ END
 IDD_SpecimenData DIALOG 0, 0, 387, 341
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Specimen Data"
-FONT 9, "ＭＳ Ｐゴシック"
+FONT 13, "ＭＳ Ｐゴシック"
 BEGIN
     DEFPUSHBUTTON   "Close",IDOK,330,317,50,14
     PUSHBUTTON      "Update variants",IDC_BUTTON_Update,330,278,50,15
@@ -543,7 +543,7 @@ END
 IDD_DA_Vout DIALOG 0, 0, 218, 175
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Voltage Output on D/A Board"
-FONT 9, "ＭＳ Ｐゴシック"
+FONT 13, "ＭＳ Ｐゴシック"
 BEGIN
     DEFPUSHBUTTON   "Close",IDOK,161,151,50,17
     LTEXT           "Static",IDC_STATIC_CH01,11,29,90,8
@@ -571,7 +571,7 @@ END
 IDD_Control_ID DIALOG 0, 0, 319, 253
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Set Up Control Parameters"
-FONT 9, "ＭＳ Ｐゴシック"
+FONT 13, "ＭＳ Ｐゴシック"
 BEGIN
     DEFPUSHBUTTON   "Close",IDOK,262,75,50,14
     LTEXT           "Control ID:",IDC_STATIC,13,15,32,8
@@ -633,7 +633,7 @@ END
 IDD_DA_Channel DIALOG 0, 0, 274, 183
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "D/A Channel"
-FONT 9, "ＭＳ Ｐゴシック"
+FONT 13, "ＭＳ Ｐゴシック"
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,162,161,50,14
     LTEXT           "(V/---)",IDC_STATIC,174,18,24,8
@@ -683,7 +683,7 @@ END
 IDD_Control_File DIALOGEX 0, 0, 431, 504
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Control Parameter from a File"
-FONT 9, "ＭＳ Ｐゴシック", 0, 0, 0x0
+FONT 13, "ＭＳ Ｐゴシック", 0, 0, 0x0
 BEGIN
     DEFPUSHBUTTON   "Close",IDOK,373,7,50,14
     PUSHBUTTON      "Read from file",IDC_BUTTON_ReadFile,262,7,50,14
@@ -766,7 +766,7 @@ END
 IDD_Control_General DIALOG 0, 0, 153, 119
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "General settings in the controls "
-FONT 9, "ＭＳ Ｐゴシック"
+FONT 13, "ＭＳ Ｐゴシック"
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,7,98,50,14
     PUSHBUTTON      "Cancel",IDCANCEL,95,99,50,14
@@ -788,7 +788,7 @@ END
 IDD_Control_PreConsolidation DIALOG 0, 0, 226, 111
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Control Parameters in Pre-Consolidation Process"
-FONT 9, "ＭＳ Ｐゴシック"
+FONT 13, "ＭＳ Ｐゴシック"
 BEGIN
     PUSHBUTTON      "Close",IDCANCEL,169,90,50,14
     PUSHBUTTON      "Update",IDC_BUTTON_Update,7,90,50,14
@@ -811,7 +811,7 @@ END
 IDD_Control_Consolidation DIALOG 0, 0, 178, 113
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Control Parameters in Consolidation Process"
-FONT 9, "ＭＳ Ｐゴシック"
+FONT 13, "ＭＳ Ｐゴシック"
 BEGIN
     DEFPUSHBUTTON   "Close",IDOK,120,92,50,14
     PUSHBUTTON      "Update",IDC_BUTTON_Update,7,92,50,14
