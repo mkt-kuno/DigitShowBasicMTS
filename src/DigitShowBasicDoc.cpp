@@ -211,7 +211,6 @@ void CDigitShowBasicDoc::DA_OUTPUT()
 {	DigitShowContext* ctx = GetContext();
 	ModbusRTU* modbus = GetModbusInstance();
 	if(!modbus->IsOpen()) return;
-	ctx->ao.raw[ctx->daCh.EP_Axis] = ctx->ao.raw[ctx->daCh.EP_Cell]; // Mirror the legacy single EP command onto the new second EP output.
 	uint16_t aoData[ModbusRTU::AO_CHANNELS];
 	for(int i=0;i<ModbusRTU::AO_CHANNELS;i++){
 		if(ctx->ao.raw[i] < 0.0f) ctx->ao.raw[i] = 0.0f;

@@ -3,7 +3,7 @@
 ## Project summary
 
 - This repository is a **Windows MFC SDI desktop app** controlling a **hollow torsional shear triaxial test apparatus** (axial load and torque applied independently to a hollow cylinder specimen).
-- Toolchain assumptions are **Visual Studio 2022 + MFC (dynamic)**, toolset `v143`, **MBCS / MultiByte** (`CharacterSet=MultiByte`, *not* Unicode). Win32 and x64 configurations exist; **x64 is the primary target**.
+- Toolchain assumptions are **Visual Studio 2022 + MFC (static)**, toolset `v143`, **MBCS / MultiByte** (`CharacterSet=MultiByte`, *not* Unicode). Win32 and x64 configurations exist; **x64 is the primary target**.
 - AD/DA communication is implemented through a **Modbus RTU serial driver** via `src/ModbusRTU.cpp` / `src/ModbusRTU.h`.
 - Derived from DigitShowBasic. Licensed under **GPLv3**.
 
@@ -86,7 +86,7 @@ A control number of **0 must stop loading** — do not let new modes break that 
 | CH01 | Axial direction (Clutch) (0 V = Down, 5 V = Up) |
 | CH02 | Axial motor speed |
 | CH03 | EP cell pressure |
-| CH04 | EP axial pressure (mirrors EP cell) |
+| CH04 | EP axial pressure (manual output only; automatic control preserves its setpoint) |
 | CH05 | Torsion motor On/Off (0 V = Off, 5 V = On) |
 | CH06 | Torsion direction (Clutch) (0 V = CW, 5 V = CCW) |
 | CH07 | Torsion motor speed |

@@ -666,7 +666,7 @@ void CCalibrationFactor::OnBUTTONCFSave()
 		FileCalData = fopen((LPCSTR)pFileName , "w" );
 		fprintf(FileCalData,"16 \n");
 		for(i=0;i<AI_MAX_CHANNELS;i++){
-			fprintf(FileCalData,"%d	%lf	%lf	%lf\n",i,ctx->ai.cal.a[i],ctx->ai.cal.b[i],ctx->ai.cal.c[i]);
+			fprintf(FileCalData,"%d\t%.17g\t%.17g\t%.17g\n",i,ctx->ai.cal.a[i],ctx->ai.cal.b[i],ctx->ai.cal.c[i]);
 		}
 		fclose(FileCalData);
 	}	

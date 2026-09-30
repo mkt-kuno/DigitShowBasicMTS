@@ -104,5 +104,5 @@ AI協業でリファクタリングする前の[legacy版](https://github.com/mk
 
 ### 補足
 - 旧CONTEC/CAIO向けのFIFOバッファ計測は廃止し、Timerごとの**ポーリング読取**へ変更しました。
-- 現状の実装では **EP Axis Pressure(ch4)** は **EP Cell Pressure(ch3)** の指令値を既定でミラーします。
+- **EP Axis Pressure(ch4)** は手動DA出力で独立して設定できます。自動制御ではこのチャンネルの設定値を変更しません（接続開始・終了時は全出力をゼロにリセットします）。
 - 旧POT1/POT2の2系統回転計測は、新しい暫定AIマップの **T.Disp(ch10)** 1系統へ集約しています。
