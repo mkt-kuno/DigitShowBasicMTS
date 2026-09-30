@@ -393,7 +393,6 @@
 #define IDC_STATIC_PHY14                2068
 #define IDC_STATIC_PHY15                2069
 #define IDC_STATIC_PHY00                2070
-#define IDC_EDIT_DChannel               2071
 #define IDC_STATIC_CH01                 2073
 #define IDC_STATIC_CH02                 2074
 #define IDC_STATIC_CH03                 2075

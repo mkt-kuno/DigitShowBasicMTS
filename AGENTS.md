@@ -54,21 +54,20 @@ A change counts as complete only after a clean build (**0 errors**) with the Rel
 
 ### Hardware
 
-- AI board(s): device name `"AIO000"` → `AdId[0]`; a second board uses `AdId[1]` when enabled (`NUMAD > 1`). Calibration supports channels Ch.00–15 / Ch.16–31 switching.
-- AO board: device name `"AIO001"` → `DaId[0]`.
-- If device names differ, rename them in Device Manager (see README).
+- Modbus RTU via USB COM port: 16 signed AI registers (HX711 CH0-7, ADS1115 CH8-15) and 8 AO registers (GP8403, millivolts).
+- AI display and calibration use a fixed 16-channel map; there is no second-board channel switching.
 
 ### Timer-driven execution model (critical)
 
 All loops run from `CDigitShowBasicView::OnTimer`:
 
 - **Timer 1** (fixed interval): acquisition loop — `AD_INPUT()` → `Cal_Physical()` / `Cal_Param()` → `ShowData()`.
-- **Timer 2**: control feedback loop started by `Start_Control()`; dispatches by control number into `Control_DA()`; ends each cycle with explicit `DA_OUTPUT()`. `Stop_Control()` kills it.
-- **Timer 3**: periodic data save (`SaveToFile()` / `SaveToFile2()`).
+- **Timer 2**: started by `OnBUTTONCtrlOn()`; dispatches into `Control_DA()` and writes through `DA_OUTPUT()`. `OnBUTTONCtrlOff()` kills the timer and calls `Stop_Control()` to stop motors.
+- **Timer 3**: periodic data save (`SaveToFile()`).
 
 ### Control mode dispatch
 
-Control number selects the algorithm executed inside `CDigitShowBasicDoc::Control_DA()`. Implemented modes (methods in `DigitShowBasicDoc.h`):
+Control ID 0 stops motors, 1 runs pre-consolidation, 2 runs consolidation, and 3-14 are reserved (only existing output values are sent). ID 15 dispatches the loading algorithms using `controlFile.Num[CurrentNum]`; this pattern number is separate from Control ID. Implemented modes (methods in `DigitShowBasicDoc.h`):
 
 | Mode family | Methods |
 |---|---|
@@ -93,9 +92,9 @@ A control number of **0 must stop loading** — do not let new modes break that 
 
 Channel indices are defined via `#define DA_CH_*` in `src/DigitShowContext.h` and accessed via `ctx->daCh.*`. DA calibration factors per channel are set as `ctx->ao.cal.a[]` / `ctx->ao.cal.b[]`.
 
-### AI channel assignments (`NameV[]` / `NameP[]`, up to 32 ch)
+### AI channel assignments (`NameV[]` / `NameP[]`, 16 ch)
 
-Primary board (typical wiring): CH0 vertical load [N], CH1 torque [Ncm], CH2/CH3 POT angles [rad], CH4 HCDPT effective stress [kPa], CH5 external LVDT, CH6 LDT1, CH8–CH10 CG gauges, CH11 LDT2, CH13 LCDPT volume change. CH16–31 belong to the optional second board.
+CH0 vertical load [N], CH1 external vertical displacement [mm], CH2/CH3 LDT1/LDT2 [mm], CH4 torque [Ncm], CH5-7 CG1-3 [mm], CH8 HCDPT effective stress [kPa], CH9 LCDPT volume change [mm3], CH10 torsional displacement [deg], CH11-15 spare. CH10 is converted to radians and currently supplies both rotation values in `Cal_Param()`.
 
 `Cal_Physical()` converts all channels generically via calibration coefficients; `Cal_Param()` derives physical quantities from specific indices. If hardware wiring changes, update `Cal_Param()`, channel name tables in `DigitShowBasicDoc.cpp`, `Specimen.cpp`, `CalibrationFactor.cpp` labels, view headers, and `.rc` UI labels together. Existing `.cal` files key coefficients by channel index → rewiring requires recalibration.
 

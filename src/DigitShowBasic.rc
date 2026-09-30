@@ -152,7 +152,7 @@ IDD_DIGITSHOWBASIC_FORM DIALOGEX 0, 0, 580, 444
 STYLE DS_SETFONT | WS_CHILD
 FONT 13, "ＭＳ Ｐゴシック", 0, 0, 0x0
 BEGIN
-    GROUPBOX        "Voltage OutPut",IDC_STATIC,6,7,563,71
+    GROUPBOX        "Raw Value(int16_t: -32768 to +32767)",IDC_STATIC,6,7,563,71
     EDITTEXT        IDC_EDIT_Vout00,15,29,56,15,ES_RIGHT | ES_AUTOHSCROLL
     EDITTEXT        IDC_EDIT_Vout01,80,29,58,14,ES_RIGHT | ES_AUTOHSCROLL
     EDITTEXT        IDC_EDIT_Vout02,150,29,58,14,ES_RIGHT | ES_AUTOHSCROLL
@@ -169,7 +169,7 @@ BEGIN
     EDITTEXT        IDC_EDIT_Vout12,290,56,58,14,ES_RIGHT | ES_AUTOHSCROLL
     EDITTEXT        IDC_EDIT_Vout14,430,56,58,14,ES_RIGHT | ES_AUTOHSCROLL
     EDITTEXT        IDC_EDIT_Vout15,500,56,58,14,ES_RIGHT | ES_AUTOHSCROLL
-    GROUPBOX        "Physical Value Output",IDC_STATIC,6,86,562,73
+    GROUPBOX        "Physical Value",IDC_STATIC,6,86,562,73
     EDITTEXT        IDC_EDIT_Phyout00,15,110,56,15,ES_RIGHT | ES_AUTOHSCROLL
     EDITTEXT        IDC_EDIT_Phyout01,81,110,58,14,ES_RIGHT | ES_AUTOHSCROLL
     EDITTEXT        IDC_EDIT_Phyout02,150,110,58,14,ES_RIGHT | ES_AUTOHSCROLL
@@ -186,7 +186,7 @@ BEGIN
     EDITTEXT        IDC_EDIT_Phyout13,360,136,58,14,ES_RIGHT | ES_AUTOHSCROLL
     EDITTEXT        IDC_EDIT_Phyout14,430,136,58,14,ES_RIGHT | ES_AUTOHSCROLL
     EDITTEXT        IDC_EDIT_Phyout15,500,136,58,14,ES_RIGHT | ES_AUTOHSCROLL
-    GROUPBOX        "Parameter of Static Physical-Value",IDC_STATIC,6,169,562,99
+    GROUPBOX        "Parameter",IDC_STATIC,6,169,562,99
     EDITTEXT        IDC_EDIT_Para00,14,192,58,14,ES_RIGHT | ES_AUTOHSCROLL
     EDITTEXT        IDC_EDIT_Para01,81,192,58,14,ES_RIGHT | ES_AUTOHSCROLL
     EDITTEXT        IDC_EDIT_Para02,150,192,58,14,ES_RIGHT | ES_AUTOHSCROLL
@@ -211,30 +211,30 @@ BEGIN
     EDITTEXT        IDC_EDIT_Para21,360,247,58,14,ES_RIGHT | ES_AUTOHSCROLL
     EDITTEXT        IDC_EDIT_Para22,430,247,58,14,ES_RIGHT | ES_AUTOHSCROLL
     EDITTEXT        IDC_EDIT_Para23,500,247,58,14,ES_RIGHT | ES_AUTOHSCROLL
-    CTEXT           "sigma'(z) [kPa]",IDC_STATIC,14,183,59,8
-    CTEXT           "sigma'(r) [kPa] ",IDC_STATIC,81,183,59,8
-    CTEXT           "sigma'(q) [kPa]",IDC_STATIC,149,183,59,8
-    CTEXT           "tau(zq) [kPa]",IDC_STATIC,221,183,57,8
-    CTEXT           "sigma'(3) [kPa]",IDC_STATIC,501,210,58,8
-    CTEXT           "epsilon(z) [%]",IDC_STATIC,360,183,58,8
-    CTEXT           "epsilon(vol) [%]",IDC_STATIC,291,184,58,8
-    CTEXT           "LDT1 [mm]",IDC_STATIC,430,183,62,8
-    CTEXT           "LDT2 [mm]",IDC_STATIC,500,183,60,8
-    CTEXT           "CG1 [mm]",IDC_STATIC,14,210,61,8
-    CTEXT           "q [kPa]",IDC_STATIC,290,209,59,8
-    CTEXT           "sigma'(1) [kPa]",IDC_STATIC,366,209,45,8
-    CTEXT           "CG2 [mm]",IDC_STATIC,83,210,61,8
-    CTEXT           "CG3 [mm]",IDC_STATIC,138,210,84,8
-    CTEXT           "p' [kPa]",IDC_STATIC,218,210,62,8
-    CTEXT           "gamma1(zq) [%]",IDC_STATIC,13,240,64,8
-    CTEXT           "gamma2(zq) [%]",IDC_STATIC,78,240,64,8
-    CTEXT           "Inner Cell Pre.[kPa]",IDC_STATIC,149,240,62,8
-    CTEXT           "Outer Cell Pre.[kPa]",IDC_STATIC,218,240,63,8
-    CTEXT           "Inner diameter (mm)",IDC_STATIC,286,240,67,8
-    CTEXT           "Outer diameter [mm]",IDC_STATIC,358,240,62,8
-    CTEXT           "sigma'(2)=sigma'(r)",IDC_STATIC,431,210,59,8
-    CTEXT           "Height [mm]",IDC_STATIC,440,239,37,8
-    CTEXT           "Volume [mm3]",IDC_STATIC,493,239,72,8
+    LTEXT           "00: sigma'(z) [kPa]",IDC_STATIC,14,183,58,8
+    LTEXT           "01: sigma'(r) [kPa]",IDC_STATIC,81,183,58,8
+    LTEXT           "02: sigma'(q) [kPa]",IDC_STATIC,150,183,58,8
+    LTEXT           "03: tau(zq) [kPa]",IDC_STATIC,220,183,58,8
+    LTEXT           "15: sigma'(3) [kPa]",IDC_STATIC,500,210,58,8
+    LTEXT           "05: epsilon(z) [%]",IDC_STATIC,360,183,58,8
+    LTEXT           "04: epsilon(vol) [%]",IDC_STATIC,290,184,58,8
+    LTEXT           "06: LDT1 [mm]",IDC_STATIC,430,183,58,8
+    LTEXT           "07: LDT2 [mm]",IDC_STATIC,500,183,58,8
+    LTEXT           "08: CG1 [mm]",IDC_STATIC,14,210,58,8
+    LTEXT           "12: q [kPa]",IDC_STATIC,290,209,58,8
+    LTEXT           "13: sigma'(1) [kPa]",IDC_STATIC,360,209,58,8
+    LTEXT           "09: CG2 [mm]",IDC_STATIC,81,210,58,8
+    LTEXT           "10: CG3 [mm]",IDC_STATIC,150,210,58,8
+    LTEXT           "11: p' [kPa]",IDC_STATIC,220,210,58,8
+    LTEXT           "16: gamma1(zq) [%]",IDC_STATIC,14,240,64,8
+    LTEXT           "17: gamma2(zq) [%]",IDC_STATIC,81,240,64,8
+    LTEXT           "18: Inner Cell Pre.[kPa]",IDC_STATIC,150,240,62,8
+    LTEXT           "19: Outer Cell Pre.[kPa]",IDC_STATIC,220,240,63,8
+    LTEXT           "20: Inner diameter (mm)",IDC_STATIC,290,240,67,8
+    LTEXT           "21: Outer diameter [mm]",IDC_STATIC,360,240,62,8
+    LTEXT           "14: sigma'(2)=sigma'(r)",IDC_STATIC,430,210,59,8
+    LTEXT           "22: Height [mm]",IDC_STATIC,430,239,58,8
+    LTEXT           "23: Volume [mm3]",IDC_STATIC,500,239,58,8
     EDITTEXT        IDC_EDIT_Ctrl_ID,73,347,32,14,ES_RIGHT | ES_AUTOHSCROLL | ES_READONLY
     EDITTEXT        IDC_EDIT_NowTime,73,381,56,14,ES_RIGHT | ES_AUTOHSCROLL | ES_READONLY
     EDITTEXT        IDC_EDIT_SeqTime,73,398,56,14,ES_RIGHT | ES_AUTOHSCROLL | ES_READONLY
@@ -250,23 +250,13 @@ BEGIN
     GROUPBOX        "Contents of Control ID.",IDC_STATIC,134,271,332,163
     LTEXT           "File Name",IDC_STATIC,12,417,31,8
     EDITTEXT        IDC_EDIT_FileName,73,414,56,14,ES_RIGHT | ES_AUTOHSCROLL | ES_READONLY
-    LTEXT           "ID_0: No Control,",IDC_STATIC,139,288,51,8
-    LTEXT           "ID_1: Pre-Consolidation,",IDC_STATIC,139,302,70,8
-    LTEXT           "ID_2: Consolidation,",IDC_STATIC,139,316,57,8
-    LTEXT           "ID_3: No Control,",IDC_STATIC,139,330,49,8
-    LTEXT           "ID_4: No Control,",IDC_STATIC,139,345,49,8
-    LTEXT           "ID_5: No Control,",IDC_STATIC,139,360,49,8
-    LTEXT           "ID_6: No Control,",IDC_STATIC,139,375,49,8
-    LTEXT           "ID_7: No Control,",IDC_STATIC,139,390,49,8
-    LTEXT           "ID_8:  No Control,",IDC_STATIC,284,288,51,8
-    LTEXT           "ID_9:  No Control,",IDC_STATIC,284,302,51,8
-    LTEXT           "ID_10: No Control,",IDC_STATIC,284,316,52,8
-    LTEXT           "ID_11: No Control,",IDC_STATIC,284,330,52,8
-    LTEXT           "ID_12: No Control,",IDC_STATIC,284,344,52,8
-    LTEXT           "ID_13: No Control,",IDC_STATIC,284,358,52,8
-    LTEXT           "ID_14: No Control,",IDC_STATIC,284,374,52,8
-    LTEXT           "ID_15: Control from file.",IDC_STATIC,284,390,69,8
-    GROUPBOX        "Settings of Control ID = 15.",IDC_STATIC,472,347,104,79
+    LTEXT           "ID 0: Stop motors",IDC_STATIC,139,288,310,8
+    LTEXT           "ID 1: Pre-Consolidation",IDC_STATIC,139,302,310,8
+    LTEXT           "ID 2: Consolidation",IDC_STATIC,139,316,310,8
+    LTEXT           "ID 3-14: Reserved (no feedback control)",IDC_STATIC,139,330,310,8
+    LTEXT           "ID 15: Control from file",IDC_STATIC,139,345,310,8
+    LTEXT           "Control Pattern No. selects the loading mode within ID 15.",IDC_STATIC,139,375,310,8
+    GROUPBOX        "ID 15 Settings",IDC_STATIC,472,347,104,79
     LTEXT           "Step No.",IDC_STATIC,476,362,26,8
     LTEXT           "Control Pattern No.",IDC_STATIC,476,377,57,8
     LTEXT           "Cyclic No.",IDC_STATIC,476,408,31,8
@@ -275,48 +265,46 @@ BEGIN
     EDITTEXT        IDC_EDIT_CFCyclicNo,545,406,26,14,ES_RIGHT | ES_AUTOHSCROLL | ES_READONLY
     LTEXT           "Step Time (min.)",IDC_STATIC,476,393,49,8
     EDITTEXT        IDC_EDIT_CFStepTime,545,390,26,14,ES_RIGHT | ES_AUTOHSCROLL | ES_READONLY
-    GROUPBOX        "Current Settings of sampling and control",IDC_STATIC,6,333,127,101
+    GROUPBOX        "Current Settings",IDC_STATIC,6,333,127,101
     LTEXT           "Control ID",IDC_STATIC,12,284,31,10
     LTEXT           "Sampling Time (ms)",IDC_STATIC,12,300,59,8
     COMBOBOX        IDC_COMBO_Control_ID,72,281,33,173,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
     COMBOBOX        IDC_COMBO_SamplingTime,72,297,33,156,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
     PUSHBUTTON      "Set",IDC_BUTTON_SetCtrlID,106,281,24,14
     PUSHBUTTON      "Set",IDC_BUTTON_SetSamplingTime,106,297,24,14
-    GROUPBOX        "Setting Control_ID and Sampling Time",IDC_STATIC,6,271,127,60
-    CTEXT           "Static",IDC_STATIC_VLT00,16,21,55,8
-    CTEXT           "Static",IDC_STATIC_VLT01,80,21,58,8
-    CTEXT           "Static",IDC_STATIC_VLT02,152,21,57,8
-    CTEXT           "Static",IDC_STATIC_VLT03,223,22,55,8
-    CTEXT           "Static",IDC_STATIC_VLT04,292,21,56,8
-    CTEXT           "Static",IDC_STATIC_VLT05,363,21,55,8
-    CTEXT           "Static",IDC_STATIC_VLT06,430,21,57,8
-    CTEXT           "Static",IDC_STATIC_VLT07,500,21,57,8
-    CTEXT           "Static",IDC_STATIC_VLT08,14,48,57,8
-    CTEXT           "Static",IDC_STATIC_VLT09,83,47,53,8
-    CTEXT           "Static",IDC_STATIC_VLT10,152,48,56,8
-    CTEXT           "Static",IDC_STATIC_VLT11,221,48,57,8
-    CTEXT           "Static",IDC_STATIC_VLT12,293,48,55,8
-    CTEXT           "Static",IDC_STATIC_VLT13,361,48,57,8
-    CTEXT           "Static",IDC_STATIC_VLT14,432,48,56,8
-    CTEXT           "Static",IDC_STATIC_VLT15,502,48,55,8
-    CTEXT           "Static",IDC_STATIC_PHY00,17,102,54,8
-    CTEXT           "Static",IDC_STATIC_PHY01,81,102,59,8
-    CTEXT           "Static",IDC_STATIC_PHY02,152,102,57,8
-    CTEXT           "Static",IDC_STATIC_PHY03,220,102,58,8
-    CTEXT           "Static",IDC_STATIC_PHY04,284,101,69,8
-    CTEXT           "Static",IDC_STATIC_PHY05,362,102,55,8
-    CTEXT           "Static",IDC_STATIC_PHY06,432,101,55,8
-    CTEXT           "Static",IDC_STATIC_PHY07,500,102,57,8
-    CTEXT           "Static",IDC_STATIC_PHY08,16,128,56,8
-    CTEXT           "Static",IDC_STATIC_PHY09,84,128,54,8
-    CTEXT           "Static",IDC_STATIC_PHY10,151,128,58,8
-    CTEXT           "Static",IDC_STATIC_PHY11,221,127,57,8
-    CTEXT           "Static",IDC_STATIC_PHY12,292,127,56,8
-    CTEXT           "Static",IDC_STATIC_PHY13,361,127,56,8
-    CTEXT           "Static",IDC_STATIC_PHY14,431,127,58,8
-    CTEXT           "Static",IDC_STATIC_PHY15,504,127,54,8
-    LTEXT           "Displayed channel",IDC_STATIC,12,315,54,8
-    EDITTEXT        IDC_EDIT_DChannel,72,313,33,14,ES_CENTER | ES_AUTOHSCROLL | ES_READONLY
+    GROUPBOX        "Control / Save Settings",IDC_STATIC,6,271,127,60
+    LTEXT           "Static",IDC_STATIC_VLT00,15,21,56,8
+    LTEXT           "Static",IDC_STATIC_VLT01,80,21,58,8
+    LTEXT           "Static",IDC_STATIC_VLT02,150,21,58,8
+    LTEXT           "Static",IDC_STATIC_VLT03,220,22,58,8
+    LTEXT           "Static",IDC_STATIC_VLT04,290,21,58,8
+    LTEXT           "Static",IDC_STATIC_VLT05,360,21,58,8
+    LTEXT           "Static",IDC_STATIC_VLT06,430,21,58,8
+    LTEXT           "Static",IDC_STATIC_VLT07,500,21,58,8
+    LTEXT           "Static",IDC_STATIC_VLT08,14,48,56,8
+    LTEXT           "Static",IDC_STATIC_VLT09,80,47,58,8
+    LTEXT           "Static",IDC_STATIC_VLT10,150,48,58,8
+    LTEXT           "Static",IDC_STATIC_VLT11,220,48,58,8
+    LTEXT           "Static",IDC_STATIC_VLT12,290,48,58,8
+    LTEXT           "Static",IDC_STATIC_VLT13,360,48,58,8
+    LTEXT           "Static",IDC_STATIC_VLT14,430,48,58,8
+    LTEXT           "Static",IDC_STATIC_VLT15,500,48,58,8
+    LTEXT           "Static",IDC_STATIC_PHY00,15,102,56,8
+    LTEXT           "Static",IDC_STATIC_PHY01,81,102,58,8
+    LTEXT           "Static",IDC_STATIC_PHY02,150,102,58,8
+    LTEXT           "Static",IDC_STATIC_PHY03,220,102,58,8
+    LTEXT           "Static",IDC_STATIC_PHY04,290,101,58,8
+    LTEXT           "Static",IDC_STATIC_PHY05,360,102,58,8
+    LTEXT           "Static",IDC_STATIC_PHY06,430,101,58,8
+    LTEXT           "Static",IDC_STATIC_PHY07,500,102,58,8
+    LTEXT           "Static",IDC_STATIC_PHY08,14,128,58,8
+    LTEXT           "Static",IDC_STATIC_PHY09,81,128,58,8
+    LTEXT           "Static",IDC_STATIC_PHY10,150,128,58,8
+    LTEXT           "Static",IDC_STATIC_PHY11,220,127,58,8
+    LTEXT           "Static",IDC_STATIC_PHY12,290,127,58,8
+    LTEXT           "Static",IDC_STATIC_PHY13,360,127,58,8
+    LTEXT           "Static",IDC_STATIC_PHY14,430,127,58,8
+    LTEXT           "Static",IDC_STATIC_PHY15,500,127,58,8
 END
 
 IDD_Calibration_Factor DIALOG 0, 0, 390, 325
@@ -451,7 +439,7 @@ FONT 13, "ＭＳ Ｐゴシック"
 BEGIN
     DEFPUSHBUTTON   "Close",IDOK,119,110,50,14
     LTEXT           "Amp. No. :",IDC_STATIC,26,15,30,8
-    LTEXT           "Voltage",IDC_STATIC,76,34,23,8
+    LTEXT           "Raw Counts",IDC_STATIC,69,34,44,8
     LTEXT           "Physical Value",IDC_STATIC,125,34,44,8
     PUSHBUTTON      "Update",IDC_BUTTON_AmpUpdate,66,110,50,14
     EDITTEXT        IDC_EDIT_AmpNO,69,12,40,14,ES_AUTOHSCROLL

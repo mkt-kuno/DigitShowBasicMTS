@@ -172,7 +172,6 @@ CDigitShowBasicView::CDigitShowBasicView()
 	m_VLT13 = _T("");
 	m_VLT14 = _T("");
 	m_VLT15 = _T("");
-	m_DChannel = _T("Ch.00-15");
 	//}}AFX_DATA_INIT
 	// TODO: この場所に構築用のコードを追加してください。
 	Flag_Ctrl=FALSE;
@@ -288,7 +287,6 @@ void CDigitShowBasicView::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_STATIC_VLT13, m_VLT13);
 	DDX_Text(pDX, IDC_STATIC_VLT14, m_VLT14);
 	DDX_Text(pDX, IDC_STATIC_VLT15, m_VLT15);
-	DDX_Text(pDX, IDC_EDIT_DChannel, m_DChannel);
 	//}}AFX_DATA_MAP
 }
 
@@ -430,7 +428,6 @@ void CDigitShowBasicView::OnTimer(UINT_PTR nIDEvent)
 
 void CDigitShowBasicView::ShowData()
 {	DigitShowContext* ctx = GetContext();
-	m_DChannel = "Ch.00-15";
 	CString* v[] = { &m_Vout00,&m_Vout01,&m_Vout02,&m_Vout03,&m_Vout04,&m_Vout05,&m_Vout06,&m_Vout07,&m_Vout08,&m_Vout09,&m_Vout10,&m_Vout11,&m_Vout12,&m_Vout13,&m_Vout14,&m_Vout15 };
 	CString* p[] = { &m_Phyout00,&m_Phyout01,&m_Phyout02,&m_Phyout03,&m_Phyout04,&m_Phyout05,&m_Phyout06,&m_Phyout07,&m_Phyout08,&m_Phyout09,&m_Phyout10,&m_Phyout11,&m_Phyout12,&m_Phyout13,&m_Phyout14,&m_Phyout15 };
 	CString* prm[] = { &m_Para00,&m_Para01,&m_Para02,&m_Para03,&m_Para04,&m_Para05,&m_Para06,&m_Para07,&m_Para08,&m_Para09,&m_Para10,&m_Para11,&m_Para12,&m_Para13,&m_Para14,&m_Para15,&m_Para16,&m_Para17,&m_Para18,&m_Para19,&m_Para20,&m_Para21,&m_Para22,&m_Para23 };
@@ -659,7 +656,6 @@ static CString FormatViewChannelLabel(int ch, const CString& name)
 
 void CDigitShowBasicView::Reflesh()
 {	DigitShowContext* ctx = GetContext();
-	m_DChannel = "Ch.00-15";
 	m_VLT00 = FormatViewChannelLabel(0, ctx->NameV[0]);
 	m_VLT01 = FormatViewChannelLabel(1, ctx->NameV[1]);
 	m_VLT02 = FormatViewChannelLabel(2, ctx->NameV[2]);

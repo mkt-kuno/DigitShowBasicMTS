@@ -57,17 +57,17 @@ void InitContext(DigitShowContext* ctx)
 		ctx->ao.cal.b[i] = 0.0;
 	}
 
-	ctx->NameV[0] = _T("V.Load");	ctx->NameP[0] = _T("V.Load,N");
-	ctx->NameV[1] = _T("V.Disp");	ctx->NameP[1] = _T("V.DispEXT,mm");
-	ctx->NameV[2] = _T("LDT1");	ctx->NameP[2] = _T("LDT1,mm");
-	ctx->NameV[3] = _T("LDT2");	ctx->NameP[3] = _T("LDT2,mm");
-	ctx->NameV[4] = _T("T.Load");	ctx->NameP[4] = _T("Torque,Ncm");
-	ctx->NameV[5] = _T("CG1");	ctx->NameP[5] = _T("CG1,mm");
-	ctx->NameV[6] = _T("CG2");	ctx->NameP[6] = _T("CG2,mm");
-	ctx->NameV[7] = _T("CG3");	ctx->NameP[7] = _T("CG3,mm");
-	ctx->NameV[8] = _T("HCDPT");	ctx->NameP[8] = _T("EffectiveStress,kPa");
-	ctx->NameV[9] = _T("LCDPT");	ctx->NameP[9] = _T("DeltaVol.,mm3");
-	ctx->NameV[10] = _T("T.Disp");	ctx->NameP[10] = _T("Tor disp,deg");
+	ctx->NameV[0] = _T("V.Load");	ctx->NameP[0] = _T("V.Load[N]");
+	ctx->NameV[1] = _T("V.Disp");	ctx->NameP[1] = _T("V.DispEXT[mm]");
+	ctx->NameV[2] = _T("LDT1");	ctx->NameP[2] = _T("LDT1[mm]");
+	ctx->NameV[3] = _T("LDT2");	ctx->NameP[3] = _T("LDT2[mm]");
+	ctx->NameV[4] = _T("T.Load");	ctx->NameP[4] = _T("Torque[Ncm]");
+	ctx->NameV[5] = _T("CG1");	ctx->NameP[5] = _T("CG1[mm]");
+	ctx->NameV[6] = _T("CG2");	ctx->NameP[6] = _T("CG2[mm]");
+	ctx->NameV[7] = _T("CG3");	ctx->NameP[7] = _T("CG3[mm]");
+	ctx->NameV[8] = _T("HCDPT");	ctx->NameP[8] = _T("EffCellP[kPa]");
+	ctx->NameV[9] = _T("LCDPT");	ctx->NameP[9] = _T("DeltaVol.[mm3]");
+	ctx->NameV[10] = _T("T.Disp");	ctx->NameP[10] = _T("Tor disp[deg]");
 	for (i = 11; i < AI_MAX_CHANNELS; i++) {
 		ctx->NameV[i] = _T("");
 		ctx->NameP[i] = _T("");

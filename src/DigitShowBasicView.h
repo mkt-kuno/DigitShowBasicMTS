@@ -137,7 +137,6 @@ public:
 	CString	m_VLT13;
 	CString	m_VLT14;
 	CString	m_VLT15;
-	CString	m_DChannel;
 	//}}AFX_DATA
 
 // アトリビュート
