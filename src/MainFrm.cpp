@@ -49,6 +49,7 @@ IMPLEMENT_DYNCREATE(CMainFrame, CFrameWnd)
 
 BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	//{{AFX_MSG_MAP(CMainFrame)
+	ON_WM_GETMINMAXINFO()
 	ON_COMMAND(ID_DA_Vout, OnDAVout)
 	ON_COMMAND(ID_DA_Channel, OnDAChannel)
 	ON_COMMAND(ID_Control_File, OnControlFile)
@@ -71,6 +72,15 @@ CMainFrame::CMainFrame()
 
 CMainFrame::~CMainFrame()
 {
+}
+
+void CMainFrame::OnGetMinMaxInfo(MINMAXINFO* lpMMI)
+{
+	CFrameWnd::OnGetMinMaxInfo(lpMMI);
+	if (lpMMI->ptMinTrackSize.x < 1300)
+		lpMMI->ptMinTrackSize.x = 1300;
+	if (lpMMI->ptMinTrackSize.y < 1000)
+		lpMMI->ptMinTrackSize.y = 1000;
 }
 
 BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)

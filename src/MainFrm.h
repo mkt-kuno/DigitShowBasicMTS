@@ -57,6 +57,7 @@ public:
 private:
 protected:
 	//{{AFX_MSG(CMainFrame)
+	afx_msg void OnGetMinMaxInfo(MINMAXINFO* lpMMI);
 	afx_msg void OnDAVout();
 	afx_msg void OnDAChannel();
 	afx_msg void OnControlFile();
